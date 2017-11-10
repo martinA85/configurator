@@ -1,0 +1,329 @@
+<odoo>
+    <data>
+        <template id="website_product_configurator" inherit_id="website_sale.product" customize_show="True" name="Configurator">
+            <xpath expr="//span[@t-field='product.image']" position="replace">
+                <t t-if="not product.is_configurable">
+                  <span itemprop="image" t-field="product.image" t-options="{'widget': 'image', 'class': 'product_detail_img', 'alt-field': 'name', 'zoom': 'image'}" groups="!website_sale.group_website_multi_image"/>
+                </t>
+            </xpath> 
+            <xpath expr="//div[@id='product_details']" position="before">
+                <t t-if="product.is_configurable">
+                    <div class="col-sm-5"></div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Configurateur</h2>
+                            <input type="hidden" t-att-value="product.is_configurable" id="is_configurable"/>
+                            <input type="hidden" t-att-value="product.price" id="prod_price"/>
+                            <div id="config_out" style="margin-top:7%;">
+                                <span t-field="product.background" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive", "style": "position:relative;width:100%; height:auto;margin-bottom:5%;"}' />
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="row" style="margin-top:86px;">
+                                <div class="panel panel-default" id="summary_line">
+                                    <div class="panel-heading">
+                                        <h4 class="text-center" style="margin:3%">Votre <span t-field="product.name"/></h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <t t-foreach="product.variant_ids" t-as="p_variant">
+                                            <div class="col-sm-4">
+                                                <div class="row">
+                                                    <h5 style="padding-top:17px"><span t-field="p_variant.name" />:</h5>
+                                                    <div class="" style="">
+                                                        <input type="hidden" t-att-value="p_variant.name"/>
+                                                        <button class="btn btn-xs btn-danger pull-right del-variant" style="margin-top:-28px;margin-right:40px">x</button>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h5 class="var_out" style=""><img style="height:60px;width:120px;margin-right:45px;;object-fit:cover;" src="/configOdoo/static/img/void.png"/><input type="hidden" t-att-value="p_variant.name"/><span class="ref_output col-sm-10" style="padding-left:10px;font-size:11px"></span></h5>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <div class="panel-footer text-center">
+                                        <form action="/shop/config/recap">
+                                            <input name="product_id" id="product_id" t-att-value="product.id" type="hidden"/>
+                                            <input name="variant_lst" id="variant_lst" type="hidden" value="0"/>
+                                            <input name="banquette" id="banquette_out" type="hidden" value="0"/>
+                                            <input name="rideaux" id="rideaux_out" type="hidden" value="0"/>
+                                            <input name="dossier" id="dossier_out" type="hidden" value="0"/>
+                                            <button class="btn btn-success" id="checkout_config">Demander un devis</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom:25px;">
+                                <nav class="navbar navbar-default" style="margin-bottom:0%;">
+                                    <ul id="tabs-menu" class="nav navbar-nav">
+                                        <li t-foreach="product.variant_ids" t-as="p_variant"><a t-attf-href="#" data-toggle="tab"><span t-field="p_variant.name"/></a></li>
+                                    </ul>
+                                </nav>
+                                <div class="tab-content" style="background-color:rgba(194,194,194,0.5);border:1px solid transparent;">
+                                    <t t-set="temp" t-value="1"/> <!--variable to collapse first accordion-->
+                                    <t t-foreach="product.variant_ids" t-as="p_variant">
+                                        <t t-if="temp == 1">
+                                            <div t-att-id="p_variant.name" class="tab-pane fade active in">
+                                                <t t-set="temp2" t-value="1"/>
+                                                <t t-foreach="p_variant.var_material_id" t-as="material">
+                                                    <div class="row panel-default" style="margin-left:10px;margin-top:5px;margin-bottom:5px;">
+                                                        <div class="panel-heading" style="margin-right:25px;">
+                                                            <h4 t-att-href="material.href_id" data-toggle="collapse" class="panel-title expand">
+                                                                <div class="right-arrow pull-right">+</div>
+                                                                    <a href="#">
+                                                                    <span t-field="material.libelle"/>
+                                                                    <t t-esc="temps"></t>
+                                                                    <!-- <i class="fa fa-sort-down" aria-hidden="true"></i> -->
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <t t-if="temp2 == 1">
+                                                            <div t-att-id="material.id" class="collapse panel-collapse in" 
+                                                            style="background-color:rgba(255,255,255,1);;margin-right:25px;">
+                                                                <ul style="padding-left:10px;">
+                                                                    <t t-foreach="material.line_ids" t-as="v_line">
+                                                                        <li style="display:inline-block;">
+                                                                            <div t-att-class="p_variant.name">
+                                                                                <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:50px;height:100px;object-fit:cover;"}'/>
+                                                                                <input type="hidden" t-att-value="v_line.libelle" id="line_libelle"/>
+                                                                                <input type="hidden" t-att-value="v_line.extra_price"/>
+                                                                                <input type="hidden" t-att-value="v_line.id"/>
+                                                                                <input type="hidden" t-att-value="v_line.name" class="line_name"/>
+                                                                                <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:150px;height:150px;visibility:hidden;position:absolute;z-index:1"}'/>
+                                                                            </div>
+                                                                        </li>
+                                                                    </t>
+                                                                </ul>
+                                                            </div>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <div t-att-id="material.id" class="collapse panel-collapse in" 
+                                                            style="background-color:rgba(255,255,255,1);;margin-right:25px;">
+                                                                <ul style="padding-left:10px;">
+                                                                    <t t-foreach="material.line_ids" t-as="v_line">
+                                                                        <li style="display:inline-block;">
+                                                                            <div t-att-class="p_variant.name">
+                                                                                <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:50px;height:100px;object-fit:cover;"}'/>
+                                                                                <input type="hidden" t-att-value="v_line.libelle" id="line_libelle"/>
+                                                                                <input type="hidden" t-att-value="v_line.extra_price"/>
+                                                                                <input type="hidden" t-att-value="v_line.id"/>
+                                                                                <input type="hidden" t-att-value="v_line.name" class="line_name"/>
+                                                                                <span class="variant_span_big" t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img_big", "style":"width:150px;height:150px;visibility:hidden;position:absolute;z-index:1"}'/>
+                                                                            </div>
+                                                                        </li>
+                                                                    </t>
+                                                                </ul>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                    <t t-set="temp2" t-value="0"/>
+                                                    <t t-set="temp" t-value="0"/>
+                                                </t>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div t-att-id="p_variant.name" class="tab-pane fade">
+                                                <t t-foreach="p_variant.var_material_id" t-as="material">
+                                                    <div class="row panel-default" style="margin-left:10px;margin-top:5px;margin-bottom:5px;">
+                                                        <div class="panel-heading" style="margin-right:25px;">
+                                                            <h4 t-att-href="material.href_id" data-toggle="collapse" class="panel-title expand">
+                                                                <div class="right-arrow pull-right">+</div>
+                                                                    <a href="#">
+                                                                    <span t-field="material.libelle"/>
+                                                                    <t t-esc="temps"></t>
+                                                                    <!-- <i class="fa fa-sort-down" aria-hidden="true"></i> -->
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div t-att-id="material.id" class="collapse panel-collapse" 
+                                                            style="background-color:rgba(255,255,255,1);;margin-right:25px;">
+                                                            <ul style="padding-left:10px;">
+                                                                <t t-foreach="material.line_ids" t-as="v_line">
+                                                                    <li style="display:inline-block;">
+                                                                        <div t-att-class="p_variant.name">
+                                                                            <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:50px;height:100px;object-fit:cover;"}'/>
+                                                                            <input type="hidden" t-att-value="v_line.libelle" id="line_libelle"/>
+                                                                            <input type="hidden" t-att-value="v_line.extra_price"/>
+                                                                            <input type="hidden" t-att-value="v_line.id"/>
+                                                                            <input type="hidden" t-att-value="v_line.name" class="line_name"/>
+                                                                            <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:150px;height:150px;visibility:hidden;position:absolute;z-index:1"}'/>
+                                                                        </div>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <t t-set="temp" t-value="0"/>
+                                                </t>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </t>
+            </xpath>
+            <xpath expr="//div[@id='product_details']" position="before">
+                <t t-if="product.is_configurable">
+                    
+                </t>
+            </xpath>
+            <xpath expr="//a[@id='add_to_cart']" position="replace">
+                <div t-if="product.is_configurable">
+                 </div>
+                <t t-if="not product.is_configurable">
+                    <a id="add_to_cart" class="btn btn-primary btn-lg mt8 js_check_product a-submit" href="#">Add to Cart</a>
+              </t>
+            </xpath>
+        </template>
+
+
+        <template id="recap_config" name="recap_config">
+            <t t-call="website.layout">
+                <t t-set="title">Votre Configuration : </t>
+                    <style>
+                            body{
+                                background-image: url("/configOdoo/static/img/bg.png");
+                            }
+                    </style>
+                <div class="oe_structure">
+                 <div class="container" style="padding-bottom:10%">
+                    <div class="row" style="background-color:white;margin-top:50px">
+                        <div class="text-center" style="background-color: #AFCA40;padding-bottom:40px;padding-top:40px">
+                            <h2 style="color:white">Votre Configuration</h2>
+                        </div>
+                        <div style="margin-top:0%;padding-left:25px;padding-right:25px">
+                            <form action="/shop/config/valid_request">
+                                <table class="table">
+                                    <thead>
+                                        <th><h3><span t-field="product.name"/></h3></th>
+                                        <th><h3></h3></th>
+                                        <th><h3>Reference</h3></th>
+                                        <th><h3>Largeur</h3></th>
+                                        <th><h3>Longueur</h3></th>
+                                        <th><h3>Epaisseur</h3></th>
+                                    </thead>
+                                    <tbody>
+                                        <t t-if="banquette">
+                                            <tr id="banquette">
+                                                <td style="padding-top:35px;"><h4 class="variant_name">Banquette : </h4></td>
+                                                <td><span t-field="banquette.icon" t-field-options='{"widget": "image", "style":"100px;height:100px"}'/></td>
+                                                <td style="padding-top: 46px;"><span t-field="banquette.name" class="id_variant"/><input name="refbanq" t-att-value="banquette.name" type="hidden"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="lbanq" type="text" placeholder="Largeur (cm)"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="Lbanq" type="text" placeholder="Longueur (cm)"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="ebanq" type="text" placeholder="Epaisseur (cm)"/></td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="dossier">
+                                            <tr id="dossier">
+                                                <td style="padding-top:35px;"><h4 class="variant_name">Dossier : </h4></td>
+                                                <td><span t-field="dossier.icon" t-field-options='{"widget": "image", "style":"100px;height:100px"}'/></td>
+                                                <td style="padding-top: 46px;"><span t-field="dossier.name" class="id_variant"/><input name="refdoss" t-att-value="dossier.name" type="hidden"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="ldoss" type="text" placeholder="Largeur (cm)"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="Ldoss" type="text" placeholder="Longueur (cm)"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="edoss" type="text" placeholder="Epaisseur (cm)"/></td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="rideaux">
+                                            <tr id="rideaux">
+                                                <td style="padding-top:35px;"><h4 class="variant_name">Rideaux : </h4></td>
+                                                <td><span t-field="rideaux.icon" t-field-options='{"widget": "image", "style":"100px;height:100px"}'/></td>
+                                                <td style="padding-top: 46px;"><span t-field="rideaux.name" class="id_variant"/><input name="refrid" t-att-value="rideaux.name" type="hidden"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="lrid" type="text" placeholder="Largeur (cm)"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="Lrid" type="text" placeholder="Longueur (cm)"/></td>
+                                                <td style="padding-top: 23px;"><input style="margin-top:20px" name="erid" type="text" placeholder="Epaisseur (cm)"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    </table>
+                                    <div class="form-group">
+                                        <label for="contact_name">Nom : </label>
+                                        <input class="form-control" name="contact_name" type="text" placeholder="Votre nom" t-att-value="request.params.get('contact_name', '')"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Telephone : </label>
+                                        <input class="form-control" name="phone" type="text" placeholder="Numéro de telephone" t-att-value="request.params.get('phone', '')"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email_form">Email : </label>
+                                        <input class="form-control" name="email_form" type="text" placeholder="Votre email" t-att-value="request.params.get('email_from', '')"/>
+                                    </div>
+                                    <input class="form-control" name="description" id="config_str" type="hidden"/>
+                                    <!--<input type="text" class="form-control o_website_form_input" name="partner_name" required="" t-att-value="request.params.get('partner_name', '')"/>-->
+                                    <div class="row pull-right" style="margin-top:25px;">
+                                        <input class="btn btn-success" type="submit" value="Valider la demande" id="valid_request" style="margin:15px;"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+        
+        
+        <template id="thanks_page" name="thanks_page">
+            <t t-call="website.layout">
+                <t t-set="title">Votre Configuration : </t>
+                    <style>
+                            body{
+                                background-image: url("/configOdoo/static/img/bg.png");
+                            }
+                    </style>
+                <div class="oe_structure">
+                    <div class="container" style="padding-bottom:10%">  
+                         <div style="padding-top:5%;" class="text-center">
+                             <div style="background-color: #AFCA40;padding-bottom:40px;padding-top:40px">
+                                 <h2 style="color:white">Merci</h2>
+                             </div>
+                             <div style="background-color:white;margin-top:0%;padding-top:30px;padding-bottom:25px">
+                                 <h4 style="margin-top:10px;margin-bottom:10px">Votre demande a bien etait prise en compte</h4>
+                                <p style="margin-top:10px;margin-bottom:10px">Nous vous recontacterons rapidement pour répondre à votre demande</p>
+                                <a class="btn btn-success" href="/" style="margin-top:10px;margin-bottom:10px">Retour au site</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+        
+        
+        <template id="website_product_configurator_qte" inherit_id="website_sale.product_quantity" customize_show="True" name="configurator_qte">
+            
+                <xpath expr="//div[@class='css_quantity input-group oe_website_spinner']" position="replace">
+                    <div t-if="not product.is_configurable">
+                        <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
+                            <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
+                                <i class="fa fa-minus"/>
+                            </a>
+                            <input type="text" class="form-control" data-min="1" name="add_qty" value="1"/>
+                            <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
+                                <i class="fa fa-plus"/>
+                            </a>
+                        </div>
+                    </div>
+                </xpath>
+        </template>
+        <template id="web_layout_style" inherit_id="web.layout" customize_show="True" name="web_layout_style">
+            <xpath expr="//meta[@name='viewport']" position="after">
+                <t t-if="product">
+                    <t t-if="product.is_configurable">
+                        <style>
+                            .variant_img:hover{
+                                height:250px;
+                                width:250px;
+                            }
+                        </style>
+                    </t>
+                </t>
+            </xpath>
+        </template> 
+    </data>
+
+    <template id="js_frontend" name="Product Configurator" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/configOdoo/static/js/config.js"></script>
+            <!--<script type="text/javascript" src="/configOdoo/static/js/recap.js"></script>-->
+        </xpath>
+    </template>
+</odoo>
