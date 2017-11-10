@@ -27,12 +27,11 @@ function init(){
     for(var w = 0; w < product_details.childNodes.length; w++){
         product_details.remove(product_details[w]);
       }
+      setTabs();
     }
 
     layout = document.getElementById("choosen_layout").value;
     console.log(layout);
-
-    setTabs();
 }
 
 //function executed on the click on a variant image
