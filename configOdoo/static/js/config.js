@@ -28,10 +28,8 @@ function init(){
         product_details.remove(product_details[w]);
       }
       setTabs();
+      layout = document.getElementById("choosen_layout").value;
     }
-
-    layout = document.getElementById("choosen_layout").value;
-    console.log(layout);
 }
 
 //function executed on the click on a variant image
