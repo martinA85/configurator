@@ -46,6 +46,7 @@ function clickOption(){
     imgChild = this;
     classe = imgChild.classList;
     for(var i = 0; i<classe.length; i++){
+      console.log(classe[i]);
         if(classe[i] == "active_var"){
           console.log("variant active")
           imgChild.classList.remove("active_var");
