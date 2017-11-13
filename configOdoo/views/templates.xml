@@ -54,8 +54,8 @@
                        <group>
                            <field name="variant_line_ids" string="Configuration">
                                <tree>
-                                   <field name="variant_string"/>
-                                   <field name="name"/>
+                                   <field name="variant_line_ids.variant_string"/>
+                                   <field name="variant_line_ids.name"/>
                                </tree>
                            </field>
                        </group>

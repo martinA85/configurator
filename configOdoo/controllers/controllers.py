@@ -115,22 +115,8 @@ class SaleSite(WebsiteSale):
             "phone" : phone,
             "email_from" : email_form,
             "description" : description,
-            "variant_line_ids" : variant_line_ids,        }
+            "variant_line_ids" : variant_line_ids,
+        }
         
         request.env['crm.lead'].create(vals)
         return request.render("configOdoo.thanks_page")
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
