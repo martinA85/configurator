@@ -214,10 +214,10 @@
                         <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/bg.jpeg);padding-bottom:20px;padding-top:20px">
                           <span t-field="product.layout"/>
                           <t t-if="product.layout=='h'">
+                            <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px;border-style:solid;border-width:5px;border-color:#434343"}'/>
                           </t>
-                          <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px;border-style:solid;border-width:5px;border-color:#434343"}'/>
                           <t t-if="product.layout=='v'">
-                            <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:570px;width:751px;border-style:solid;border-width:5px;border-color:#434343"}'/>
+                            <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:771px;width:570px;border-style:solid;border-width:5px;border-color:#434343"}'/>
                           </t>
                         </div>
                          <div class="container" style="background-color:white; padding-bottom:20px; padding-top:1%;margin-bottom:10px">
