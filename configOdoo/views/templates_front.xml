@@ -212,7 +212,6 @@
                 <t t-set="title">Recap de la configuration</t>
                     <div class="oe_structure">
                         <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/bg.jpeg);padding-bottom:20px;padding-top:20px">
-                          <span t-field="product.layout"/>
                           <t t-if="product.layout=='h'">
                             <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px;border-style:solid;border-width:5px;border-color:#434343"}'/>
                           </t>
@@ -272,7 +271,6 @@
                                         <label for="email_form">Email : </label>
                                         <input class="form-control" name="email_form" type="text" placeholder="Votre email" t-att-value="request.params.get('email_from', '')"/>
                                     </div>
-                                    <input class="form-control" name="description" id="config_str" type="hidden"/>
                                     <!--<input type="text" class="form-control o_website_form_input" name="partner_name" required="" t-att-value="request.params.get('partner_name', '')"/>-->
                                     <div class="row pull-right" style="margin-top:25px;">
                                         <input class="btn btn-success" type="submit" value="Valider la demande" id="valid_request" style="margin:15px;"/>
@@ -320,6 +318,32 @@
                 </t>
             </xpath>
         </template>
+        
+        <template id="thanks_page" name="thanks_page">
+            <t t-call="website.layout">
+                <t t-set="title">Votre Configuration : </t>
+                    <style>
+                            body{
+                                background-image: url("/configOdoo/static/img/bg.png");
+                            }
+                    </style>
+                <div class="oe_structure">
+                    <div class="container" style="padding-bottom:10%">  
+                         <div style="padding-top:5%;" class="text-center">
+                             <div style="background-color: #AFCA40;padding-bottom:40px;padding-top:40px">
+                                 <h2 style="color:white">Merci</h2>
+                             </div>
+                             <div style="background-color:white;margin-top:0%;padding-top:30px;padding-bottom:25px">
+                                 <h4 style="margin-top:10px;margin-bottom:10px">Votre demande a bien etait prise en compte</h4>
+                                <p style="margin-top:10px;margin-bottom:10px">Nous vous recontacterons rapidement pour répondre à votre demande</p>
+                                <a class="btn btn-success" href="/" style="margin-top:10px;margin-bottom:10px">Retour au site</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
     </data>
 
     <template id="js_frontend" name="Product Configurator" inherit_id="website.assets_frontend">

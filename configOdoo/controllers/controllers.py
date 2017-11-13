@@ -117,3 +117,39 @@ class SaleSite(WebsiteSale):
         request.env['crm.lead'].create(vals)
 
         return request.render("configOdoo.thanks_page")
+
+
+    @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True)
+    def ask_quotation(self, contact_name, phone, email_form, description, config_id, product_id):
+        product = self.env['product.product'].browse(product_id)
+        description = "Configuration for product : " + product.name
+        
+        config = self.env['configurateur.config'].browse(config_id)
+        
+        
+        
+        vals = {
+            "name" : name,
+            "contact_name" : contact_name,
+            "phone" : phone,
+            "email_form" : email_form,
+            "description" : description,
+            "variant_line_ids" : config.variant_line_ids
+        }
+        
+        request.env['crm.lead'].create(vals)
+        
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
