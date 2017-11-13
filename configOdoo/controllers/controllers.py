@@ -126,6 +126,7 @@ class SaleSite(WebsiteSale):
         description = "Configuration for product : " + product.name
         
         config = request.env['configurateur.config'].browse(int(config_id))
+        print(config)
         
         name = "Demande de devis configuration " + product.name
         
@@ -133,7 +134,7 @@ class SaleSite(WebsiteSale):
             "name" : name,
             "contact_name" : contact_name,
             "phone" : phone,
-            "email_form" : email_form,
+            "email_from" : email_form,
             "description" : description,
             "variant_line_ids" : config.variant_line_ids
         }
