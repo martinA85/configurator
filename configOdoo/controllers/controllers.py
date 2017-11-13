@@ -127,7 +127,7 @@ class SaleSite(WebsiteSale):
         
         config = request.env['configurateur.config'].browse(int(config_id))
         
-        
+        name = "Demande de devis configuration " + product.name
         
         vals = {
             "name" : name,
