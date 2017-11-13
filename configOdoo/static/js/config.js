@@ -158,6 +158,7 @@ function updateConfigTab(variant_name){
   variant_tab.getElementsByClassName("variant_extra_recap")[0].innerHTML = extra;
 
   if(layout == "v"){
+    console.log("updateImg");
     variant_tab.getElementsByClassName("variant_img_recap")[0].src = variant_img.src;
   }
 
