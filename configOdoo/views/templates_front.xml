@@ -223,7 +223,14 @@
                                     <tr>
                                         <td>
                                             <row><h4>Product : <span t-field="product.name"/></h4></row>
-                                            <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                            <row>
+                                              <t t-if="product.layout=='h'">
+                                                <span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px"}'/>
+                                              </t>
+                                              <t t-if="product.layout=='v'">
+                                                <span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:570px;width:751px"}'/>
+                                              </t>
+                                            </row>
                                         </td>
                                         <td></td>
                                         <td style="text-align: -webkit-right;">
