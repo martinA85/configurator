@@ -149,6 +149,7 @@ function updateConfigTab(variant_name){
   variant_tab = configTab.getElementsByClassName(variant_name)[0];
   //variant pannel (used to get active variant informations)
   variant_img = document.getElementById(variant_name).getElementsByClassName("active_var")[0];
+  console.log(variant_img);
   var_div = variant_img.parentElement.parentElement;
 
   extra = var_div.getElementsByClassName("variant_extra")[0].value;
