@@ -96,28 +96,7 @@ class SaleSite(WebsiteSale):
                 line.price_unit += line.extra_config
 
         return to_return
-
-
-    @http.route(['/shop/config/valid_request'], type='http', auth="public", website=True)
-    def valid_request(self, contact_name, phone, email_form, config, product_id):
-
-        name = "Demande devis site web : "+contact_name
-
-        config_tmp = self.env['configurateur.config']
-    	config = config_tmp.browse(int(config))
-
-        vals = {
-            "name" : name,
-            "contact_name" : contact_name,
-            "phone" : phone,
-            "email_from": email_form,
-            "variant_line_ids": config.variant_line_ids
-        }
-
-        request.env['crm.lead'].create(vals)
-
-        return request.render("configOdoo.thanks_page")
-
+    
 
     @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True,csrf=False)
     def ask_quotation(self, contact_name, phone, email_form, config_id, product_id):
@@ -126,7 +105,7 @@ class SaleSite(WebsiteSale):
         description = "Configuration for product : " + product.name
         
         config = request.env['configurateur.config'].browse(int(config_id))
-        print(config)
+        variant_line_ids = config.variant_line_ids
         
         name = "Demande de devis configuration " + product.name
         
@@ -136,8 +115,7 @@ class SaleSite(WebsiteSale):
             "phone" : phone,
             "email_from" : email_form,
             "description" : description,
-            "variant_line_ids" : config.variant_line_ids
-        }
+            "variant_line_ids" : variant_line_ids,        }
         
         request.env['crm.lead'].create(vals)
         return request.render("configOdoo.thanks_page")
