@@ -119,7 +119,7 @@ class SaleSite(WebsiteSale):
         return request.render("configOdoo.thanks_page")
 
 
-    @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True)
+    @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True,csrf=False)
     def ask_quotation(self, contact_name, phone, email_form, description, config_id, product_id):
         product = self.env['product.product'].browse(product_id)
         description = "Configuration for product : " + product.name
