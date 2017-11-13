@@ -43,7 +43,11 @@ function clickOption(){
     //this step delete active class of active variant and set her to unactive
     //child = <div><span><img></span><input hidden></div>
     //imgChild is the img in the div
-    imgChild = child.getElementsByClassName("active_var")[0];
+    if(child.getElementsByClassName("active_var")[0] != null){
+      imgChild = child.getElementsByClassName("active_var")[0];
+    }else{
+      imgChild = this;
+    }
     classe = imgChild.classList;
     console.log(imgChild)
     for(var i = 0; i<classe.length; i++){
