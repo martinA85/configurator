@@ -139,6 +139,7 @@ class SaleSite(WebsiteSale):
         }
         
         request.env['crm.lead'].create(vals)
+        return request.render("configOdoo.thanks_page")
         
         
     
