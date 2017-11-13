@@ -44,7 +44,7 @@
             </field>
         </record>
 
-        <record id="crm.lead_form_config" model="ir.ui.view">
+<!--        <record id="crm.lead_form_config" model="ir.ui.view">
            <field name="model">crm.lead</field>
            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
            <field name="priority">16</field>
@@ -62,7 +62,7 @@
                    </page>
                </xpath>
            </field>
-        </record>
+        </record>-->
 
         <record id="variant_form_view" model="ir.ui.view">
 
