@@ -45,6 +45,7 @@ class ConfigurateurProduct(http.Controller):
                 pass
 
         # ipdb.set_trace()
+        print(type(config_image))
 
         in_nem_file = io.BytesIO()
         config_image.save(in_nem_file, format="png")
@@ -138,7 +139,7 @@ class SaleSite(WebsiteSale):
         }
         
         request.env['crm.lead'].create(vals)
-        return request.render("configOdoo.thanks_page")s
+        return request.render("configOdoo.thanks_page")
         
         
     
