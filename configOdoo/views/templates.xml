@@ -51,8 +51,6 @@
            <field name="arch" type="xml">
                <xpath expr="//page[@name='lead']" position="after">
                    <page name="configuration" string="Configuration">
-                       <field name="user_id"></field>
-                       <field name="team_id"></field>
                        <group>
                            <field name="variant_line_ids" string="Configuration">
                                <tree>
