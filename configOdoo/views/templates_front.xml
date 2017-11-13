@@ -258,7 +258,7 @@
                             <t t-if="not salable">
                                 <form action="/shop/config/ask_qutoation" style="text-align:right">
                                     <input name="product_id" id="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" type="hidden"/>
-                                    <input name="config" t-att-value="config.id" type="hidden"/>
+                                    <input name="config_id" t-att-value="config.id" type="hidden"/>
                                     <div class="form-group">
                                         <label for="contact_name">Nom : </label>
                                         <input class="form-control" name="contact_name" type="text" placeholder="Votre nom" t-att-value="request.params.get('contact_name', '')"/>
