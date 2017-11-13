@@ -45,14 +45,12 @@ class ConfigurateurProduct(http.Controller):
                 pass
 
         # ipdb.set_trace()
-        print(type(config_image))
 
         in_nem_file = io.BytesIO()
         config_image.save(in_nem_file, format="png")
         in_nem_file.seek(0)
         config_image = base64_encoded_result_bytes = base64.b64encode(in_nem_file.read())
 
-        print(config_var_ids)
         vals = {
             'total_price':str(config_price),
             'variant_line_ids':[(6,0,config_var_ids)],
@@ -127,7 +125,6 @@ class SaleSite(WebsiteSale):
         description = "Configuration for product : " + product.name
         
         config = request.env['configurateur.config'].browse(int(config_id))
-        print(config.variant_line_ids)
         
         name = "Demande de devis configuration " + product.name
         
