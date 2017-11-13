@@ -126,7 +126,7 @@ class SaleSite(WebsiteSale):
         description = "Configuration for product : " + product.name
         
         config = request.env['configurateur.config'].browse(int(config_id))
-        print(config)
+        ipdb.set_trace()
         
         name = "Demande de devis configuration " + product.name
         
