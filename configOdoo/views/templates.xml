@@ -49,7 +49,7 @@
            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
            <field name="priority">16</field>
            <field name="arch" type="xml">
-               <xpath expr="//page[@string="Internal Notes"]" position="after">
+               <xpath expr="//page[@string='Internal Notes']" position="after">
                    <page name="Configuration">
                        <group>
                            <field name="variant_line_ids" string="Configuration">
