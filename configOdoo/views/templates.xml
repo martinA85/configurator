@@ -50,7 +50,7 @@
            <field name="priority">16</field>
            <field name="arch" type="xml">
                <xpath expr="//page[@name='lead']" position="after">
-                   <page name="Configuration">
+                   <page name="configuration" string="Configuration">
                        <group>
                            <field name="variant_line_ids" string="Configuration">
                                <tree>
