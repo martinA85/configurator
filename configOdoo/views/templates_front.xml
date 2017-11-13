@@ -212,6 +212,7 @@
                 <t t-set="title">Recap de la configuration</t>
                     <div class="oe_structure">
                         <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/bg.jpeg);padding-bottom:20px;padding-top:20px">
+                          <span t-field="product.layout"/>
                           <t t-if="product.layout=='h'">
                           </t>
                           <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px;border-style:solid;border-width:5px;border-color:#434343"}'/>
