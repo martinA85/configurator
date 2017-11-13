@@ -122,10 +122,10 @@ class SaleSite(WebsiteSale):
     @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True,csrf=False)
     def ask_quotation(self, contact_name, phone, email_form, config_id, product_id):
         
-        product = request.env['product.product'].browse(product_id)
+        product = request.env['product.product'].browse(int(product_id))
         description = "Configuration for product : " + product.name
         
-        config = request.env['configurateur.config'].browse(config_id)
+        config = request.env['configurateur.config'].browse(int(config_id))
         
         
         
