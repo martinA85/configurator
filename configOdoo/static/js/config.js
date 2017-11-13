@@ -112,7 +112,7 @@ function updateImage(element, parent){
         divImg.id= layer;
         backgroundDiv.insertBefore(divImg, backgroundDiv.firstChild);
         layerImg = document.createElement("img");
-        layerImg.style = "position:absolute; height:auto;z-index:1;";
+        layerImg.style = "position:absolute; height:751px;width:570px;z-index:1;";
         layerImg.src = newSrc;
         divImg.appendChild(layerImg);
       }

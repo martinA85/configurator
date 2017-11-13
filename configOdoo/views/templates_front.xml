@@ -15,7 +15,7 @@
                                 <input type="hidden" t-att-value="product.is_configurable" id="is_configurable"/>
                                 <input type="hidden" t-att-value="product.price" id="prod_price"/>
                                 <div id="config_out" style="margin-top:7%;">
-                                    <span t-field="product.background" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive", "style": "position:relative;width:100%; height:auto;margin-bottom:5%;"}' />
+                                    <span t-field="product.background" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive", "style": "position:relative;width:570px; height:751px;margin-bottom:5%;"}' />
                                 </div>
                             </div>
                             <div class="col-sm-4 config_tab" style="margin-top:10%;">
