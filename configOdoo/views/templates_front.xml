@@ -212,7 +212,12 @@
                 <t t-set="title">Recap de la configuration</t>
                     <div class="oe_structure">
                         <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/bg.jpeg);padding-bottom:20px;padding-top:20px">
-                            <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"border-style:solid;border-width:5px;border-color:#434343"}'/>
+                          <t t-if="product.layout=='h'">
+                          </t>
+                          <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px;border-style:solid;border-width:5px;border-color:#434343"}'/>
+                          <t t-if="product.layout=='v'">
+                            <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:570px;width:751px;border-style:solid;border-width:5px;border-color:#434343"}'/>
+                          </t>
                         </div>
                          <div class="container" style="background-color:white; padding-bottom:20px; padding-top:1%;margin-bottom:10px">
                             <div class="col-sm-10 col-sm-offset-1">
@@ -223,14 +228,7 @@
                                     <tr>
                                         <td>
                                             <row><h4>Product : <span t-field="product.name"/></h4></row>
-                                            <row>
-                                              <t t-if="product.layout=='h'">
-                                                <span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:770px;width:500px"}'/>
-                                              </t>
-                                              <t t-if="product.layout=='v'">
-                                                <span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:570px;width:751px"}'/>
-                                              </t>
-                                            </row>
+                                            <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
                                         </td>
                                         <td></td>
                                         <td style="text-align: -webkit-right;">
