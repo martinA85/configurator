@@ -118,5 +118,6 @@ class SaleSite(WebsiteSale):
             "variant_line_ids" : variant_line_ids,
         }
         
-        request.env['crm.lead'].create(vals)
+        lead  = request.env['crm.lead'].create(vals)
+        lead.variant_line_ids = variant_line_ids
         return request.render("configOdoo.thanks_page")
