@@ -52,7 +52,7 @@
                <xpath expr="//page[@name='lead']" position="after">
                    <page name="configuration" string="Configuration">
                        <group>
-                           <field name="variant_line_ids" string="Configuration">
+                           <field name="variant_line_ids" string="Configuration" attrs="{'invisible': [('len(variant_line_ids)', '=', 0)]}">
                                <tree>
                                    <field name="variant_string"/>
                                    <field name="name"/>
