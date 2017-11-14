@@ -119,5 +119,5 @@ class SaleSite(WebsiteSale):
         }
         
         lead  = request.env['crm.lead'].create(vals)
-        lead.variant_line_ids = variant_line_ids
+        ipdb.set_trace()
         return request.render("configOdoo.thanks_page")

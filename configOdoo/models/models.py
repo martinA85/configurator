@@ -65,6 +65,12 @@ class SaleOrderLine(models.Model):
 	extra_config = fields.Monetary(string="extra config price")
 	config = fields.Many2one("configurateur.config", readonly="1", visible="0")
 	variant_line_ids = fields.Many2many("configurateur_product.line")
+    
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount(self):
+        to_return = super(SaleOderLine,self)._compute_amount()
+        for line in self:
+            line.price_total = line.extra_config
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
