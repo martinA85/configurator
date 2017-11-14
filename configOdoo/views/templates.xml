@@ -50,9 +50,9 @@
            <field name="priority">16</field>
            <field name="arch" type="xml">
                <xpath expr="//page[@name='lead']" position="after">
-                   <page name="configuration" string="Configuration">
+                   <page name="configuration" string="Configuration" attrs="{'invisible': [('variant_line_ids', '=', [])]}">
                        <group>
-                           <field name="variant_line_ids" string="Configuration" attrs="{'invisible': [('variant_line_ids', '=', [])]}">
+                           <field name="variant_line_ids" string="Configuration">
                                <tree>
                                    <field name="variant_string"/>
                                    <field name="name"/>
