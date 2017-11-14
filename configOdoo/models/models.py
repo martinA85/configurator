@@ -71,7 +71,7 @@ class SaleOrderLine(models.Model):
         to_return = super(SaleOderLine,self)._compute_amount()
         for line in self:
             line.price_total = line.extra_config
-
+            
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
