@@ -72,10 +72,9 @@ class SaleOrderLine(models.Model):
 		to_return = super(SaleOrderLine,self)._compute_amount()
 		for line in self:
 			if(line.extra_config == 0):
-				pass
-				# price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+				price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
 			else :
-				price = (line.extra_config + line.price_unit) * (1 - (line.discount or 0.0) / 100.0)
+				price = line.config.total_price * (1 - (line.discount or 0.0) / 100.0)
 			taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_shipping_id)
 			line.update({
 			'price_tax': taxes['total_included'] - taxes['total_excluded'],
@@ -99,7 +98,7 @@ class SaleOrder(models.Model):
     		price = config.total_price
     		order_line.config = config.id
     		order_line.variant_line_ids = config.variant_line_ids
-    		order_line.price_unit = price
+    		# order_line.price_unit = price
     		order_line.product_uom_qty = 1
     		order_line.extra_config = price - product.price
     		return {"line_id":order_line.id, 'quantity':1}
