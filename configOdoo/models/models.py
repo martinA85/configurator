@@ -71,7 +71,7 @@ class SaleOrderLine(models.Model):
 		print("_compute_amount")
 		to_return = super(SaleOrderLine,self)._compute_amount()
 		for line in self:
-			if(line.extra_config == 0):
+			if(line.config.total_price == 0):
 				price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
 			else :
 				price = line.config.total_price * (1 - (line.discount or 0.0) / 100.0)
