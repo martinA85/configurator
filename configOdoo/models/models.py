@@ -89,6 +89,7 @@ class SaleOrder(models.Model):
     @api.multi
     def _cart_update(self, product_id=None, line_id=None, add_qty=0, set_qty=0, attributes=None,config=None,**kwargs):
     	to_return = super(SaleOrder, self)._cart_update(product_id=int(product_id),add_qty=add_qty, set_qty=set_qty)
+    	values = self._website_product_id_change(self.id, product_id, qty=order_line.product_uom_qty)
     	order_line = self._cart_find_product_line(product_id, line_id, **kwargs)
     	product = self.env['product.product'].browse(product_id)
 
@@ -101,6 +102,12 @@ class SaleOrder(models.Model):
     		order_line.total_price = price
     		order_line.extra_config = price - product.price
     		order_line._compute_amount()
+    		values['price_unit'] = self.env['account.tax']._fix_tax_included_price(
+                    order_line._get_display_price(product),
+                    order_line.product_id.taxes_id,
+                    order_line.tax_id
+    		)
+    		order_line.write(values)
     		return {"line_id":order_line.id, 'quantity':1}
     	else:
     		return to_return
