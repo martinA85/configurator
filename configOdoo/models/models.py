@@ -66,7 +66,7 @@ class SaleOrderLine(models.Model):
 	config = fields.Many2one("configurateur.config", readonly="1", visible="0")
 	variant_line_ids = fields.Many2many("configurateur_product.line")
 
-	@api.depends('product_uom_qty', 'discount', 'price_unit', 'taxe_id')
+	@api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
 	def _compute_amount(self):
 		to_return = super(SaleOrderLine,self)._compute_amount()
 		for line in self:
