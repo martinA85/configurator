@@ -73,7 +73,8 @@ class SaleSite(WebsiteSale):
 
     @http.route(['/shop/cart/update'], type='http', auth="public", methods=['POST'], website=True, csrf=False)
     def cart_update(self, product_id ,add_qty=1, set_qty=0,config=None,**kw):
-        to_return = super(SaleSite, self).cart_update(product_id)
+        if(config == None):
+            to_return = super(SaleSite, self).cart_update(product_id)
         if(config != None):
             request.website.sale_get_order(force_create=1)._cart_update(
                 config=config,

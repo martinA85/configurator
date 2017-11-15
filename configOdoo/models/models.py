@@ -98,9 +98,9 @@ class SaleOrder(models.Model):
     		price = config.total_price
     		order_line.config = config.id
     		order_line.variant_line_ids = config.variant_line_ids
-    		# order_line.price_unit = price
-    		order_line.product_uom_qty = 1
+    		rder_line.total_price = price
     		order_line.extra_config = price - product.price
+			order_line._compute_amount()
     		return {"line_id":order_line.id, 'quantity':1}
     	else:
     		return to_return
