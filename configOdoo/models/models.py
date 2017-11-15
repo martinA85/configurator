@@ -100,7 +100,7 @@ class SaleOrder(models.Model):
     		order_line.variant_line_ids = config.variant_line_ids
     		rder_line.total_price = price
     		order_line.extra_config = price - product.price
-			order_line._compute_amount()
+    		order_line._compute_amount()
     		return {"line_id":order_line.id, 'quantity':1}
     	else:
     		return to_return
