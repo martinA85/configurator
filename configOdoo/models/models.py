@@ -68,9 +68,9 @@ class SaleOrderLine(models.Model):
 
 	@api.depends('product.uom.qty', 'discount', 'price_unit', 'taxe_id')
 	def _compute_amount(self):
-    	to_return = super(SaleOrderLine,self)._compute_amount()
-    	for line in self:
-        	line.price_total = line.extra_config
+		to_return = super(SaleOrderLine,self)._compute_amount()
+		for line in self:
+			line.price_total = line.extra_config
 
 
 class SaleOrder(models.Model):
