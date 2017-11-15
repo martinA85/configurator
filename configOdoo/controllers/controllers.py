@@ -74,13 +74,14 @@ class SaleSite(WebsiteSale):
     @http.route(['/shop/cart/update'], type='http', auth="public", methods=['POST'], website=True, csrf=False)
     def cart_update(self, product_id ,add_qty=1, set_qty=0,config=None,**kw):
         to_return = super(SaleSite, self).cart_update(product_id)
-        request.website.sale_get_order(force_create=1)._cart_update(
-            config=config,
-            product_id=int(product_id),
-            add_qty=float(add_qty),
-            set_qty=float(set_qty),
-            attributes=self._filter_attributes(**kw),
-        )
+        if(config != None):
+            request.website.sale_get_order(force_create=1)._cart_update(
+                config=config,
+                product_id=int(product_id),
+                add_qty=float(add_qty),
+                set_qty=float(set_qty),
+                attributes=self._filter_attributes(**kw),
+            )
         return request.redirect("/shop/cart")
 
 
@@ -96,19 +97,19 @@ class SaleSite(WebsiteSale):
                 line.price_unit += line.extra_config
 
         return to_return
-    
+
 
     @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True,csrf=False)
     def ask_quotation(self, contact_name, phone, email_form, config_id, product_id):
-        
+
         product = request.env['product.product'].browse(int(product_id))
         description = "Configuration for product : " + product.name
-        
+
         config = request.env['configurateur.config'].browse(int(config_id))
         variant_line_ids = config.variant_line_ids
-        
+
         name = "Demande de devis configuration " + product.name
-        
+
         vals = {
             "name" : name,
             "contact_name" : contact_name,
@@ -117,7 +118,7 @@ class SaleSite(WebsiteSale):
             "description" : description,
             "variant_line_ids" : variant_line_ids,
         }
-        
+
         lead  = request.env['crm.lead'].create(vals)
         ipdb.set_trace()
         return request.render("configOdoo.thanks_page")
