@@ -279,7 +279,7 @@
                             </t>
                             <t t-if="salable">
                                 <form action="/shop/cart/update" method="POST" style="text-align:right">
-                                    <input name="product_id" id="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" type="hidden"/>
+                                    <input name="product_id" id="product_id" t-att-value="product_config.id" type="hidden"/>
                                     <input name="config" t-att-value="config.id" type="hidden"/>
                                     <input class="btn btn-success" type="submit" value="Ajouter au pannier" style="padding:5px"/>
                                 </form>
@@ -318,7 +318,7 @@
                 </t>
             </xpath>
         </template>
-        
+
         <template id="thanks_page" name="thanks_page">
             <t t-call="website.layout">
                 <t t-set="title">Votre Configuration : </t>
@@ -328,7 +328,7 @@
                             }
                     </style>
                 <div class="oe_structure">
-                    <div class="container" style="padding-bottom:10%">  
+                    <div class="container" style="padding-bottom:10%">
                          <div style="padding-top:5%;" class="text-center">
                              <div style="background-color: #AFCA40;padding-bottom:40px;padding-top:40px">
                                  <h2 style="color:white">Merci</h2>

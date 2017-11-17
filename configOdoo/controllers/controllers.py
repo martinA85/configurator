@@ -24,6 +24,7 @@ class ConfigurateurProduct(http.Controller):
     	# variant_template is a variant_product line
     	variant_template = env['configurateur_product.line']
         config = env['configurateur.config']
+        product_tmpl = env['product.product']
 
         config_image = Image.open(BytesIO(base64.b64decode(product.background)))
 
@@ -59,12 +60,25 @@ class ConfigurateurProduct(http.Controller):
         }
 
         config = config.create(vals)
+        prod_config = product_tmpl.search([['default_code','=', config.config_code]])
+
+        if not prod_config:
+            vals = {
+                'product_tmpl_id' : product.id,
+                'image_variant' : config.config_image,
+                'price' : config.total_price,
+                'default_code' : config.config_code,
+            }
+            prod_config = product_tmpl.create(vals)
+
+
         values = {
 
             'variants':selected_variant,
             'product':product,
             'config':config,
-            'salable':salable
+            'salable':salable,
+            'product_config':prod_config
         }
         return request.render("configOdoo.recap_config",values)
 

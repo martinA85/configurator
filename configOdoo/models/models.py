@@ -58,6 +58,13 @@ class ConfigProduct(models.Model):
 	total_price = fields.Float("Cout Total", default=0)
 	variant_line_ids = fields.Many2many("configurateur_product.line")
 	config_image = fields.Binary("Image", attachment=True)
+	config_code = fields.Char(readonly="1", visible="0", compute="_compute_config_code")
+
+	def _compute_config_code(self):
+		for record in self:
+			record.config_code = "conf"
+			for variant in record.variant_line_ids:
+				record.config_code = record.config_code + "_" + variant.name
 
 class SaleOrderLine(models.Model):
 	_inherit="sale.order.line"
