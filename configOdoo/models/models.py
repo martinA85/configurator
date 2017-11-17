@@ -90,7 +90,7 @@ class SaleOrder(models.Model):
     def _cart_update(self, product_id=None, line_id=None, add_qty=0, set_qty=0, attributes=None,config=None,**kwargs):
     	to_return = super(SaleOrder, self)._cart_update(product_id=int(product_id),add_qty=add_qty, set_qty=set_qty)
     	order_line = self._cart_find_product_line(product_id, line_id, **kwargs)
-		values = self._website_product_id_change(self.id, product_id, qty=order_line.product_uom_qty)
+    	values = self._website_product_id_change(self.id, product_id, qty=order_line.product_uom_qty)
     	product = self.env['product.product'].browse(product_id)
 
     	if config != None:
