@@ -21,10 +21,11 @@ class ConfigurateurProduct(http.Controller):
     	# product is the product.template
     	product = product_template.browse(int(product_id))
 
+        product_tmpl = env['product.product']
+
     	# variant_template is a variant_product line
     	variant_template = env['configurateur_product.line']
         config = env['configurateur.config']
-        product_tmpl = env['product.product']
 
         config_image = Image.open(BytesIO(base64.b64decode(product.background)))
 
@@ -45,9 +46,6 @@ class ConfigurateurProduct(http.Controller):
             except:
                 pass
 
-        # ipdb.set_trace()
-        print(type(config_image))
-
         in_nem_file = io.BytesIO()
         config_image.save(in_nem_file, format="png")
         in_nem_file.seek(0)
@@ -61,7 +59,6 @@ class ConfigurateurProduct(http.Controller):
 
         config = config.create(vals)
         prod_config = product_tmpl.search([['default_code','=', config.config_code]])
-
         if not prod_config:
             vals = {
                 'product_tmpl_id' : product.id,
@@ -70,8 +67,6 @@ class ConfigurateurProduct(http.Controller):
                 'default_code' : config.config_code,
             }
             prod_config = product_tmpl.create(vals)
-
-
         values = {
 
             'variants':selected_variant,
@@ -135,5 +130,4 @@ class SaleSite(WebsiteSale):
         }
 
         lead  = request.env['crm.lead'].create(vals)
-        ipdb.set_trace()
         return request.render("configOdoo.thanks_page")

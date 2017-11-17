@@ -75,7 +75,6 @@ class SaleOrderLine(models.Model):
 
 	@api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
 	def _compute_amount(self):
-		print("_compute_amount")
 		to_return = super(SaleOrderLine,self)._compute_amount()
 		for line in self:
 			if(line.config.total_price == 0):
@@ -97,18 +96,18 @@ class SaleOrder(models.Model):
     def _cart_update(self, product_id=None, line_id=None, add_qty=0, set_qty=0, attributes=None,config=None,**kwargs):
     	to_return = super(SaleOrder, self)._cart_update(product_id=int(product_id),add_qty=add_qty, set_qty=set_qty)
     	order_line = self._cart_find_product_line(product_id, line_id, **kwargs)
-    	values = self._website_product_id_change(self.id, product_id, qty=order_line.product_uom_qty)
     	product = self.env['product.product'].browse(product_id)
-
     	if config != None:
     		config_tmp = self.env['configurateur.config']
     		config = config_tmp.browse(int(config))
+
     		price = config.total_price
     		order_line.config = config.id
     		order_line.variant_line_ids = config.variant_line_ids
     		order_line.total_price = price
     		order_line.extra_config = price - product.price
     		order_line._compute_amount()
+    		values = self._website_product_id_change(self.id, product_id, qty=order_line.product_uom_qty)
     		values['price_unit'] = self.env['account.tax']._fix_tax_included_price(
                     order_line._get_display_price(product),
                     order_line.product_id.taxes_id,
