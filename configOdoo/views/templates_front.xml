@@ -344,6 +344,12 @@
             </t>
         </template>
 
+        <template id="config_code_cart" inherit_id="website_sale.cart_lines" customize_show="True" name="web_layout_style">
+            <xpath expr="//a[@class='js_delete_product no-decoration']" position="before">
+                <p><span t-field="line.config_txt"/></p>
+            </xpath>
+        </template>
+
     </data>
 
     <template id="js_frontend" name="Product Configurator" inherit_id="website.assets_frontend">

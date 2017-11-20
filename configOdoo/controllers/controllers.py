@@ -22,7 +22,6 @@ class ConfigurateurProduct(http.Controller):
     	product = product_template.browse(int(product_id))
 
         product_tmpl = env['product.product']
-
     	# variant_template is a variant_product line
     	variant_template = env['configurateur_product.line']
         config = env['configurateur.config']
@@ -58,12 +57,20 @@ class ConfigurateurProduct(http.Controller):
         }
 
         config = config.create(vals)
-        prod_config = product_tmpl.search([['default_code','=', config.config_code]])
+        prod_config = product_tmpl.search([['default_code','=', config.config_code],['product_tmpl_id','=',int(product_id)]])
+        prod_base = product_tmpl.search([['default_code','=', 'conf_base'],['product_tmpl_id','=',int(product_id)]])
+        if not prod_base:
+            vals = {
+                'product_tmpl_id' : product.id,
+                'image_variant' : product.image,
+                'default_code' : 'conf_base',
+            }
+            prod_base = product_tmpl.create(vals)
         if not prod_config:
             vals = {
                 'product_tmpl_id' : product.id,
                 'image_variant' : config.config_image,
-                'price' : config.total_price,
+                'config_id' : config.id,
                 'default_code' : config.config_code,
             }
             prod_config = product_tmpl.create(vals)

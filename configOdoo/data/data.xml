@@ -1,0 +1,5 @@
+<odoo>
+	<data>
+		<function model="sale.config.settings" name="activate_product_variant" />
+	</data>
+</odoo>

@@ -28,6 +28,7 @@
         'views/views.xml',
         'views/templates.xml',
         'views/templates_front.xml',
+        'data/data.xml',
     ],
     # 'application': True,
     # only loaded in demonstration mode

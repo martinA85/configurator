@@ -13,6 +13,32 @@ class Product(models.Model):
 	layout = fields.Selection([('v','Vertricale'),('h','Horizontale')])
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
 
+	@api.onchange('is_configurable', 'lst_price')
+	def _create_base_product(self):
+		for record in self:
+			if record.is_configurable:
+				vals = {
+						'product_tmpl_id' : record.id,	
+						'image_variant' : record.image,
+						'default_code' : 'conf_base',
+						'name' : record.name + " base"
+				}
+				if not self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]):
+					self.env['product.product'].create(vals)
+				else :
+					self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]).update(vals)
+
+class ProductProduct(models.Model):
+	_inherit = "product.product"
+
+	config_id = fields.Many2one("configurateur.config", readonly="1", visible="0")
+
+	def _compute_product_price(self):
+		super(ProductProduct,self)._compute_product_price()
+		for record in self:
+			if record.config_id:
+				record.price = record.config_id.total_price
+
 class Variant(models.Model):
 	_name="configurateur_product.variant"
 
@@ -62,9 +88,12 @@ class ConfigProduct(models.Model):
 
 	def _compute_config_code(self):
 		for record in self:
-			record.config_code = "conf"
-			for variant in record.variant_line_ids:
-				record.config_code = record.config_code + "_" + variant.name
+			if not record.variant_line_ids:
+				record.config_code = "conf_base"
+			else:
+				record.config_code = "conf"
+				for variant in record.variant_line_ids:
+					record.config_code = record.config_code + "_" + variant.name
 
 class SaleOrderLine(models.Model):
 	_inherit="sale.order.line"
@@ -72,6 +101,15 @@ class SaleOrderLine(models.Model):
 	extra_config = fields.Monetary(string="extra config price")
 	config = fields.Many2one("configurateur.config", readonly="1", visible="0")
 	variant_line_ids = fields.Many2many("configurateur_product.line")
+	config_txt = fields.Char(compute="_compute_code_config")
+
+	@api.depends('config')
+	def _compute_code_config(self):
+		for record in self:
+			record.config_txt = ""
+			for line in record.config.variant_line_ids:
+				record.config_txt = record.config_txt + str(line.variant_string) + " : " + str(line.name) + "\n"
+
 
 	@api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
 	def _compute_amount(self):
@@ -123,3 +161,11 @@ class Lead(models.Model):
 	_inherit = "crm.lead"
 
 	variant_line_ids = fields.Many2many("configurateur_product.line")
+
+
+class SaleConfigSetting(models.TransientModel):
+	_inherit = "sale.config.settings"
+
+	@api.model
+	def activate_product_variant(self):
+		self.update({'group_product_variant':True})
