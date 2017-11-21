@@ -12,13 +12,13 @@ class Product(models.Model):
 	background = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
-	
+
 	@api.onchange('is_configurable', 'lst_price')
 	def _create_base_product(self):
 		for record in self:
 			if record.is_configurable:
 				vals = {
-						'product_tmpl_id' : record.id,	
+						'product_tmpl_id' : record.id,
 						'image_variant' : record.image,
 						'default_code' : 'conf_base',
 						'name' : record.name + " base"
@@ -31,7 +31,7 @@ class Product(models.Model):
 class ProductProduct(models.Model):
 	_inherit = "product.product"
 
-	config_id = fields.Many2one("configurateur.config", readonly="1", visible="0")
+	config_id = fields.Many2one("configurateur.config", readonly="1")
 
 	def _compute_product_price(self):
 		super(ProductProduct,self)._compute_product_price()
