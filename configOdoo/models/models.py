@@ -8,10 +8,25 @@ class Product(models.Model):
 
 	is_configurable = fields.Boolean(string="Configurable", index=True, default=False)
 
-	variant_ids = fields.Many2many('configurateur_product.variant', string="Variantes")
+	variant_ids = fields.Many2many('configurateur_product.variant', string="Variants")
 	background = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
-	layout = fields.Selection([('v','Vertricale'),('h','Horizontale')])
+	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
+	
+	@api.onchange('is_configurable', 'lst_price')
+	def _create_base_product(self):
+		for record in self:
+			if record.is_configurable:
+				vals = {
+						'product_tmpl_id' : record.id,	
+						'image_variant' : record.image,
+						'default_code' : 'conf_base',
+						'name' : record.name + " base"
+				}
+				if not self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]):
+					self.env['product.product'].create(vals)
+				else :
+					self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]).update(vals)
 
 class ProductProduct(models.Model):
 	_inherit = "product.product"
@@ -27,8 +42,8 @@ class ProductProduct(models.Model):
 class Variant(models.Model):
 	_name="configurateur_product.variant"
 
-	name = fields.Char()
-	libelle = fields.Char(string = "libelle(afficher sur le site)")
+	name = fields.Char(string = "Variant name", help="This name should be unique")
+	libelle = fields.Char(string = "Name printed on the website")
 	material_ids = fields.One2many('configurateur.material', 'variant_id',string = "material")
 
 
@@ -36,11 +51,11 @@ class Line_variant(models.Model):
 	_name="configurateur_product.line"
 	_rec_name = 'name'
 
-	name = fields.Char(string="reference")
-	libelle = fields.Char(string = "libelle(afficher sur le site)")
+	name = fields.Char(string="Variant line reference", help="Should be unique")
+	libelle = fields.Char(string = "Name printed on the website")
 	image = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
 	icon = fields.Binary("Image", attachment=True, help="This field holds the image used as image for the product, limited to 1024x1024px.")
-	extra_price = fields.Float("supplément", default=0)
+	extra_price = fields.Float("Extra price", default=0)
 	material_id = fields.Many2one('configurateur.material','line_ids', visible="0")
 	variant_string = fields.Char(compute="_compute_variant_string")
 
@@ -54,8 +69,8 @@ class variant_material(models.Model):
 	_name="configurateur.material"
 
 	name = fields.Char()
-	libelle = fields.Char(string = "libelle")
-	line_ids = fields.One2many('configurateur_product.line', 'material_id',string="Liste des changement")
+	libelle = fields.Char(string = "Name printed on the website")
+	line_ids = fields.One2many('configurateur_product.line', 'material_id',string="Variant line list")
 	href_id = fields.Char(compute="_compute_href", readonly="1", visible="0")
 	variant_id = fields.Many2one('configurateur_product.variant',visible="0")
 
@@ -66,8 +81,8 @@ class variant_material(models.Model):
 class ConfigProduct(models.Model):
 	_name="configurateur.config"
 
-	total_price = fields.Float("Cout Total", default=0)
-	variant_line_ids = fields.Many2many("configurateur_product.line")
+	total_price = fields.Float("Total Cost", default=0)
+	variant_line_ids = fields.Many2many("configurateur_product.line", string="Variant line list")
 	config_image = fields.Binary("Image", attachment=True)
 	config_code = fields.Char(readonly="1", visible="0", compute="_compute_config_code")
 

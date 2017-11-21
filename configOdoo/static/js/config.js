@@ -120,7 +120,11 @@ function updateImage(element, parent){
         divImg.id= layer;
         backgroundDiv.insertBefore(divImg, backgroundDiv.firstChild);
         layerImg = document.createElement("img");
-        layerImg.style = "position:absolute; height:751px;width:570px;z-index:1;";
+        if(layout == "v"){
+          layerImg.style = "position:absolute;max-width:570px;z-index:1;";
+        }else{
+          layerImg.style = "position:absolute;max-width:770px;z-index:1;";
+        }
         layerImg.src = newSrc;
         divImg.appendChild(layerImg);
       }

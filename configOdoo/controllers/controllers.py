@@ -117,15 +117,15 @@ class SaleSite(WebsiteSale):
 
 
     @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True,csrf=False)
-    def ask_quotation(self, contact_name, phone, email_form, config_id, product_id):
+    def ask_quotation(self, contact_name, phone, email_form, config_id, product_id, qty):
 
         product = request.env['product.product'].browse(int(product_id))
-        description = "Configuration for product : " + product.name
+        description = "Configuration for product : " + product.name + ", quantity asked : " + qty
 
         config = request.env['configurateur.config'].browse(int(config_id))
         variant_line_ids = config.variant_line_ids
 
-        name = "Demande de devis configuration " + product.name
+        name = "Quotation ask for " + product.name
 
         vals = {
             "name" : name,
