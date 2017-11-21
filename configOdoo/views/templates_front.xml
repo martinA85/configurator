@@ -317,7 +317,7 @@
                 <t t-if="product">
                     <t t-if="product.is_configurable">
                         <style>
-                            #product_detail{
+                            #wrap{
                                 background-image: url('/configOdoo/static/img/pinstripe.png');
                             }
                         </style>
@@ -330,7 +330,7 @@
             <t t-call="website.layout">
                 <t t-set="title">Votre Configuration : </t>
                     <style>
-                            #product_detail{
+                            #wrap{
                                 background-image: url('/configOdoo/static/img/pinstripe.png');
                             }
                     </style>
