@@ -3,8 +3,8 @@
     'name': "Odoo product configurator",
     'js': ['static/js/config.js'],
     'test': ['static/js/config.js'],
-    'category' : 'Website'
-    'summary' : "Allow you to add a dynamic product configurator on your website",
+    'summary': """
+        Allow you to add a dynamic product configurator on your website""",
 
     'description': """
         This module allows you to add dynamics product configurator for you'r products web page. You can allow your customer to take order of your product with their configuration or jsut ask for a quotation.
@@ -36,8 +36,4 @@
     'demo': [
         # 'demo/demo.xml',
     ],
-    "price":100,
-    "currency":"EUR",
-    "installable":True,
-    "auto_install":False,
 }
