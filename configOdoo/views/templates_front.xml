@@ -21,7 +21,7 @@
                             <div class="col-sm-4 config_tab" style="margin-top:4.4%;">
                                 <div class="panel panel-default" id="summary_line">
                                     <div class="panel-heading">
-                                        <h4 class="text-center" style="margin:10%">Votre <span t-field="product.name"/></h4>
+                                        <h4 class="text-center" style="margin:10%">Your <span t-field="product.name"/></h4>
                                     </div>
                                     <div class="panel-body">
                                         <t t-foreach="product.variant_ids" t-as="p_variant">
@@ -58,7 +58,7 @@
                     <t t-if="product.layout=='v'">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Configurateur</h2>
+                                <h2>Configurator</h2>
                                 <input type="hidden" t-att-value="product.is_configurable" id="is_configurable"/>
                                 <input type="hidden" t-att-value="product.price" id="prod_price"/>
                                 <div id="config_out" style="margin-top:7%;">
@@ -325,7 +325,7 @@
                 </t>
             </xpath>
         </template>
-        
+
         <template id="thanks_page" name="thanks_page">
             <t t-call="website.layout">
                 <t t-set="title">Votre Configuration : </t>
@@ -335,7 +335,7 @@
                             }
                     </style>
                 <div class="oe_structure">
-                    <div class="container" style="padding-bottom:10%">  
+                    <div class="container" style="padding-bottom:10%">
                          <div style="padding-top:5%;" class="text-center">
                              <div style="background-color: #AFCA40;padding-bottom:40px;padding-top:40px">
                                  <h2 style="color:white">Merci</h2>
