@@ -31,7 +31,7 @@
                                                         <h5><span t-field="p_variant.name" />:</h5>
                                                     </div>
                                                     <div class="col-sm-7 col-sm-offset-2">
-                                                        <h5 class="var_out"><span class="variant_str_recap">Vide</span> + <span class="variant_extra_recap">0</span>€<input type="hidden" t-att-value="p_variant.name" class="variant_name_recap"/></h5>
+                                                        <h5 class="var_out"><span class="variant_str_recap">Default</span> + <span class="variant_extra_recap">0</span>€<input type="hidden" t-att-value="p_variant.name" class="variant_name_recap"/></h5>
                                                     </div>
                                                     <div class="col-sm-1 text-center">
                                                         <input type="hidden" t-att-value="p_variant.name"/>
@@ -69,7 +69,7 @@
                                 <div class="row config_tab" style="margin-top:86px;">
                                     <div class="panel panel-default" id="summary_line">
                                         <div class="panel-heading">
-                                            <h4 class="text-center" style="margin:3%">Votre <span t-field="product.name"/></h4>
+                                            <h4 class="text-center" style="margin:3%">Your <span t-field="product.name"/></h4>
                                         </div>
                                         <div class="panel-body">
                                             <t t-foreach="product.variant_ids" t-as="p_variant">
@@ -317,7 +317,7 @@
                 <t t-if="product">
                     <t t-if="product.is_configurable">
                         <style>
-                            body{
+                            #product_detail{
                                 background-image: url('/configOdoo/static/img/pinstripe.png');
                             }
                         </style>
@@ -330,7 +330,7 @@
             <t t-call="website.layout">
                 <t t-set="title">Votre Configuration : </t>
                     <style>
-                            body{
+                            #product_detail{
                                 background-image: url('/configOdoo/static/img/pinstripe.png');
                             }
                     </style>
@@ -338,12 +338,12 @@
                     <div class="container" style="padding-bottom:10%">
                          <div style="padding-top:5%;" class="text-center">
                              <div style="background-color: #AFCA40;padding-bottom:40px;padding-top:40px">
-                                 <h2 style="color:white">Merci</h2>
+                                 <h2 style="color:white">Thank you</h2>
                              </div>
                              <div style="background-color:white;margin-top:0%;padding-top:30px;padding-bottom:25px">
-                                 <h4 style="margin-top:10px;margin-bottom:10px">Votre demande a bien etait prise en compte</h4>
-                                <p style="margin-top:10px;margin-bottom:10px">Nous vous recontacterons rapidement pour répondre à votre demande</p>
-                                <a class="btn btn-success" href="/" style="margin-top:10px;margin-bottom:10px">Retour au site</a>
+                                 <h4 style="margin-top:10px;margin-bottom:10px">We have take note of you demand</h4>
+                                <p style="margin-top:10px;margin-bottom:10px">We will contact back you as soon as possbile</p>
+                                <a class="btn btn-success" href="/" style="margin-top:10px;margin-bottom:10px">Home</a>
                              </div>
                         </div>
                     </div>
