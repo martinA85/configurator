@@ -13,20 +13,20 @@ class Product(models.Model):
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
 
-	@api.onchange('is_configurable', 'lst_price')
-	def _create_base_product(self):
-		for record in self:
-			if record.is_configurable:
-				vals = {
-						'product_tmpl_id' : record.id,
-						'image_variant' : record.image,
-						'default_code' : 'conf_base',
-						'name' : record.name + " base"
-				}
-				if not self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]):
-					self.env['product.product'].create(vals)
-				else :
-					self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]).update(vals)
+	# @api.onchange('is_configurable', 'lst_price')
+	# def _create_base_product(self):
+	# 	for record in self:
+	# 		if record.is_configurable:
+	# 			vals = {
+	# 					'product_tmpl_id' : record.id,
+	# 					'image_variant' : record.image,
+	# 					'default_code' : 'conf_base',
+	# 					'name' : str(record.name) + " base"
+	# 			}
+	# 			if not self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]):
+	# 				self.env['product.product'].create(vals)
+	# 			else :
+	# 				self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]).update(vals)
 
 class ProductProduct(models.Model):
 	_inherit = "product.product"
