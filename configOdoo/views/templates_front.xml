@@ -21,14 +21,14 @@
                             <div class="col-sm-4 config_tab" style="margin-top:4.4%;">
                                 <div class="panel panel-default" id="summary_line">
                                     <div class="panel-heading">
-                                        <h4 class="text-center" style="margin:10%">Your <span t-field="product.name"/></h4>
+                                        <strong><h4 class="text-center" style="margin:10%">Your <span t-field="product.name"/></h4></strong>
                                     </div>
                                     <div class="panel-body">
                                         <t t-foreach="product.variant_ids" t-as="p_variant">
                                             <div t-att-class="p_variant.name">
                                                 <div class="row">
                                                     <div class="row">
-                                                        <h5 style="padding-left:50px"><strong><span t-field="p_variant.name"/></strong>: <span class="variant_str_recap">Vide</span></h5>
+                                                        <h5 style="padding-left:35px"><strong><span t-field="p_variant.name"/></strong>: <span class="variant_str_recap">Vide</span></h5>
                                                         <div class="" style="">
                                                             <input type="hidden" t-att-value="p_variant.name" class="variant_name_recap"/>
                                                             <button class="btn btn-xs btn-danger pull-right del-variant" style="margin-top:-28px;margin-right:40px">x</button>
@@ -72,14 +72,14 @@
                                 <div class="row config_tab" style="margin-top:86px;">
                                     <div class="panel panel-default" id="summary_line">
                                         <div class="panel-heading">
-                                            <h4 class="text-center" style="margin:3%">Your <span t-field="product.name"/></h4>
+                                            <strong><h4 class="text-center" style="margin:3%">Your <span t-field="product.name"/></h4></strong>
                                         </div>
                                         <div class="panel-body">
                                             <t t-foreach="product.variant_ids" t-as="p_variant">
                                                 <div class="col-sm-4">
                                                     <div t-att-class="p_variant.name">
                                                         <div class="row">
-                                                            <h5 style="padding-top:17px"><span t-field="p_variant.name"/>: <span class="variant_str_recap">Vide</span></h5>
+                                                            <h5 style="padding-top:17px"><strong><span t-field="p_variant.name"/></strong>: <span class="variant_str_recap">Vide</span></h5>
                                                             <div class="" style="">
                                                                 <input type="hidden" t-att-value="p_variant.name" class="variant_name_recap"/>
                                                                 <button class="btn btn-xs btn-danger pull-right del-variant" style="margin-top:-28px;margin-right:40px">x</button>
