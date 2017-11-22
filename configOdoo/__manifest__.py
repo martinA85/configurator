@@ -38,5 +38,4 @@
     ],
     "price":100,
     "currency":"EUR",
-    "images" : ['icon.png'],
 }
