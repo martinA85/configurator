@@ -63,7 +63,7 @@
                             <div class="col-sm-4 config_tab" style="margin-top:4.4%;">
                                 <div class="panel panel-default" id="summary_line">
                                     <div class="panel-heading">
-                                        <strong><h4 class="text-center" style="margin:10%">Your <span t-field="product.name"/></h4></strong>
+                                        <strong><h4 class="text-center" style="margin:5%">Your <span t-field="product.name"/></h4></strong>
                                     </div>
                                     <div class="panel-body">
                                         <t t-foreach="product.variant_ids" t-as="p_variant">
