@@ -17,6 +17,48 @@
                                 <div id="config_out" style="margin-top:7%;">
                                     <span t-field="product.background" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive", "style": "position:relative;max-width:770px;margin-bottom:5%;"}' />
                                 </div>
+                                <div class="row">
+                                    <nav class="navbar navbar-default" style="margin-bottom:0%;">
+                                        <ul id="tabs-menu" class="nav navbar-nav">
+                                            <li t-foreach="product.variant_ids" t-as="p_variant"><a t-attf-href="#" data-toggle="tab"><span t-field="p_variant.name"/></a></li>
+                                        </ul>
+                                    </nav>
+                                    <div class="tab-content" style="background-color:rgba(194,194,194,0.5);border:1px solid transparent;">
+                                        <t t-foreach="product.variant_ids" t-as="p_variant">
+                                            <div t-att-id="p_variant.name" class="tab-pane fade">
+                                                <t t-foreach="p_variant.material_ids" t-as="material">
+                                                    <div class="row panel-default" style="margin-left:10px;margin-top:5px;margin-bottom:5px;">
+                                                        <div class="panel-heading" style="margin-right:25px;">
+                                                            <h4 t-att-href="material.href_id" data-toggle="collapse" class="panel-title expand">
+                                                                <div class="right-arrow pull-right">+</div>
+                                                                <a href="#">
+                                                                    <span t-field="material.libelle"/>
+                                                                    <!-- <i class="fa fa-sort-down" aria-hidden="true"></i> -->
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div t-att-id="material.id" class="collapse panel-collapse"
+                                                            style="background-color:rgba(255,255,255,1);;margin-right:25px;">
+                                                            <ul style="padding-left:10px;">
+                                                                <t t-foreach="material.line_ids" t-as="v_line">
+                                                                    <li style="display:inline-block;">
+                                                                        <div t-att-class="p_variant.name">
+                                                                            <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
+                                                                            <input type="hidden" t-att-value="v_line.libelle" id="line_libelle" class="variant_string"/>
+                                                                            <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
+                                                                            <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
+                                                                        </div>
+                                                                        <p class="text-center">+<span t-field="v_line.extra_price"/>€</p>
+                                                                    </li>
+                                                                </t>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </t>
+                                      </div>
+                                </div>
                             </div>
                             <div class="col-sm-4 config_tab" style="margin-top:4.4%;">
                                 <div class="panel panel-default" id="summary_line">
@@ -156,48 +198,7 @@
             <xpath expr="//div[@id='product_details']" position="before">
                 <t t-if="product.is_configurable">
                     <t t-if="product.layout=='h'">
-                        <div class="row">
-                            <nav class="navbar navbar-default" style="margin-bottom:0%;">
-                                <ul id="tabs-menu" class="nav navbar-nav">
-                                    <li t-foreach="product.variant_ids" t-as="p_variant"><a t-attf-href="#" data-toggle="tab"><span t-field="p_variant.name"/></a></li>
-                                </ul>
-                            </nav>
-                            <div class="tab-content" style="background-color:rgba(194,194,194,0.5);border:1px solid transparent;">
-                                <t t-foreach="product.variant_ids" t-as="p_variant">
-                                    <div t-att-id="p_variant.name" class="tab-pane fade">
-                                        <t t-foreach="p_variant.material_ids" t-as="material">
-                                            <div class="row panel-default" style="margin-left:10px;margin-top:5px;margin-bottom:5px;">
-                                                <div class="panel-heading" style="margin-right:25px;">
-                                                    <h4 t-att-href="material.href_id" data-toggle="collapse" class="panel-title expand">
-                                                        <div class="right-arrow pull-right">+</div>
-                                                        <a href="#">
-                                                            <span t-field="material.libelle"/>
-                                                            <!-- <i class="fa fa-sort-down" aria-hidden="true"></i> -->
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div t-att-id="material.id" class="collapse panel-collapse"
-                                                    style="background-color:rgba(255,255,255,1);;margin-right:25px;">
-                                                    <ul style="padding-left:10px;">
-                                                        <t t-foreach="material.line_ids" t-as="v_line">
-                                                            <li style="display:inline-block;">
-                                                                <div t-att-class="p_variant.name">
-                                                                    <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
-                                                                    <input type="hidden" t-att-value="v_line.libelle" id="line_libelle" class="variant_string"/>
-                                                                    <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
-                                                                    <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
-                                                                </div>
-                                                                <p class="text-center">+<span t-field="v_line.extra_price"/>€</p>
-                                                            </li>
-                                                        </t>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </t>
-                                    </div>
-                                </t>
-                              </div>
-                        </div>
+
                     </t>
                 </t>
             </xpath>
