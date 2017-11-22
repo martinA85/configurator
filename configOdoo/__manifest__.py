@@ -38,5 +38,5 @@
     ],
     "price":100,
     "currency":"EUR",
-    "images" : ['configlogo.png'],
+    "images" : ['icon.png'],
 }
