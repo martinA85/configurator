@@ -120,7 +120,7 @@ class SaleSite(WebsiteSale):
     def ask_quotation(self, contact_name, phone, email_form, config_id, product_id, qty):
 
         product = request.env['product.product'].browse(int(product_id))
-        description = "Configuration for product : " + product.name + ", quantity asked : " + str(qty)
+        description = "Configuration for product : " + str(product.name) + ", quantity asked : " + str(qty)
 
         config = request.env['configurateur.config'].browse(int(config_id))
         variant_line_ids = config.variant_line_ids
