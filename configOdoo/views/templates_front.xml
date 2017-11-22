@@ -195,13 +195,7 @@
                     </t>
                  </t>
             </xpath>
-            <xpath expr="//div[@id='product_details']" position="before">
-                <t t-if="product.is_configurable">
-                    <t t-if="product.layout=='h'">
-
-                    </t>
-                </t>
-            </xpath>
+            
             <xpath expr="//a[@id='add_to_cart']" position="replace">
                 <div t-if="product.is_configurable">
                  </div>
