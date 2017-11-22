@@ -17,7 +17,7 @@
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
-    'category': 'test',
+    'category': 'Website',
     'version': '1.0',
 
     # any module necessary for this one to work correctly
@@ -38,4 +38,5 @@
     ],
     "price":100,
     "currency":"EUR",
+    "images" : ['configlogo.png'],
 }
