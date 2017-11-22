@@ -195,7 +195,7 @@
                     </t>
                  </t>
             </xpath>
-            
+
             <xpath expr="//a[@id='add_to_cart']" position="replace">
                 <div t-if="product.is_configurable">
                  </div>
@@ -258,7 +258,7 @@
                                   <strong>Info :</strong>This product can't be ordered but you can ask for a quotation
                                 </div>
                                 <form action="/shop/config/ask_qutoation" style="text-align:right">
-                                    <input name="product_id" id="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" type="hidden"/>
+                                    <input name="product_id" id="product_id" t-att-value="product.id" type="hidden"/>
                                     <input name="config_id" t-att-value="config.id" type="hidden"/>
                                     <div class="form-group">
                                         <label for="contact_name">Name : </label>
