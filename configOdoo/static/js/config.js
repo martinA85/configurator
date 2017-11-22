@@ -168,7 +168,6 @@ function updateConfigTab(variant_name){
 
   variant_tab.getElementsByClassName("variant_str_recap")[0].innerHTML = string;
   variant_tab.getElementsByClassName("variant_extra_recap")[0].innerHTML = extra;
-
   variant_tab.getElementsByClassName("variant_img_recap")[0].src = variant_img.src;
 
 }
@@ -188,10 +187,7 @@ function clearConfig(){
   variant_tab = this.parentElement.parentElement.parentElement;
   variant_tab.getElementsByClassName("variant_str_recap")[0].innerHTML = "Vide";
   variant_tab.getElementsByClassName("variant_extra_recap")[0].innerHTML = " 0 ";
-
-  if(layout == "v"){
-    variant_tab.getElementsByClassName("variant_img_recap")[0].src = "/configOdoo/static/img/empty.png";
-  }
+  variant_tab.getElementsByClassName("variant_img_recap")[0].src = "/configOdoo/static/img/empty.png";
 
 
   //third step : delete selected icon on variant image
