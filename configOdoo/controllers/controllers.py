@@ -137,4 +137,5 @@ class SaleSite(WebsiteSale):
         }
 
         lead  = request.env['crm.lead'].create(vals)
+        lead.variant_line_ids = variant_line_ids
         return request.render("configOdoo.thanks_page")
