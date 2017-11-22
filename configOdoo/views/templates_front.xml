@@ -157,6 +157,7 @@
                 <t t-if="product.is_configurable">
                     <t t-if="product.layout=='h'">
                         <div class="row">
+                          <div class="col-sm-6">
                             <nav class="navbar navbar-default" style="margin-bottom:0%;">
                                 <ul id="tabs-menu" class="nav navbar-nav">
                                     <li t-foreach="product.variant_ids" t-as="p_variant"><a t-attf-href="#" data-toggle="tab"><span t-field="p_variant.name"/></a></li>
@@ -198,6 +199,7 @@
                                 </t>
                             </div>
                         </div>
+                      </div>
                     </t>
                 </t>
             </xpath>
