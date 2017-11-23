@@ -7,7 +7,6 @@ class Product(models.Model):
 	_inherit = 'product.template'
 
 	is_configurable = fields.Boolean(string="Configurable", index=True, default=False)
-
 	variant_ids = fields.Many2many('configurateur_product.variant', string="Variants")
 	background = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
