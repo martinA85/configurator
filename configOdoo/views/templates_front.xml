@@ -203,7 +203,7 @@
             </xpath>
         </template>
 
-        <template id="recap_config" name="recap_config">
+        <template id="recap_config" name="recap_config" customize_show="True">
             <t t-call="website.layout">
                 <t t-set="title">Configuration summary</t>
                     <div class="oe_structure">
