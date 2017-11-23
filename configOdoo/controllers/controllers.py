@@ -45,11 +45,13 @@ class ConfigurateurProduct(http.Controller):
             except:
                 pass
 
+        #generating configured product image using io library
         in_nem_file = io.BytesIO()
         config_image.save(in_nem_file, format="png")
         in_nem_file.seek(0)
         config_image = base64_encoded_result_bytes = base64.b64encode(in_nem_file.read())
 
+        #creating the config object
         vals = {
             'total_price':str(config_price),
             'variant_line_ids':[(6,0,config_var_ids)],
@@ -57,7 +59,8 @@ class ConfigurateurProduct(http.Controller):
         }
 
         config = config.create(vals)
-        prod_config = product_tmpl.search([['default_code','=', config.config_code],['product_tmpl_id','=',int(product_id)]])
+
+        #creating base product.product if not exist
         prod_base = product_tmpl.search([['default_code','=', 'conf_base'],['product_tmpl_id','=',int(product_id)]])
         if not prod_base:
             vals = {
@@ -66,6 +69,9 @@ class ConfigurateurProduct(http.Controller):
                 'default_code' : 'conf_base',
             }
             prod_base = product_tmpl.create(vals)
+
+        #creating configured product.product if not exist
+        prod_config = product_tmpl.search([['default_code','=', config.config_code],['product_tmpl_id','=',int(product_id)]])
         if not prod_config:
             vals = {
                 'product_tmpl_id' : product.id,
@@ -74,14 +80,16 @@ class ConfigurateurProduct(http.Controller):
                 'default_code' : config.config_code,
             }
             prod_config = product_tmpl.create(vals)
-        values = {
 
+        #value to return to the view
+        values = {
             'variants':selected_variant,
             'product':product,
             'config':config,
             'salable':salable,
             'product_config':prod_config
         }
+        #returning the view
         return request.render("configOdoo.recap_config",values)
 
 
@@ -90,8 +98,10 @@ class SaleSite(WebsiteSale):
     @http.route(['/shop/cart/update'], type='http', auth="public", methods=['POST'], website=True, csrf=False)
     def cart_update(self, product_id ,add_qty=1, set_qty=0,config=None,**kw):
         if(config == None):
+            #if product isn't a configured product, we apply original odoo treatment
             to_return = super(SaleSite, self).cart_update(product_id)
         if(config != None):
+            #if product is a configured product we call our treatment
             request.website.sale_get_order(force_create=1)._cart_update(
                 config=config,
                 product_id=int(product_id),
@@ -107,21 +117,20 @@ class SaleSite(WebsiteSale):
         to_return = super(SaleSite, self).confirm_order(**post)
         order = request.website.sale_get_order()
         lines = order.order_line
-
+        #used to be sure that order.line amount will be the right one
         for line in lines:
             if line.config != None:
                 order.amount_total += line.extra_config
                 line.price_unit += line.extra_config
-
         return to_return
 
 
     @http.route(['/shop/config/ask_qutoation'], type="http", auth="public", website=True,csrf=False)
     def ask_quotation(self, contact_name, phone, email_form, config_id, product_id, qty):
-
         product = request.env['product.product'].browse(int(product_id))
+        #this will be in description of the lead
         description = "Configuration for product : " + str(product.name) + ", quantity asked : " + str(qty)
-
+        #we are getting back config object
         config = request.env['configurateur.config'].browse(int(config_id))
         variant_line_ids = config.variant_line_ids
 
@@ -137,5 +146,7 @@ class SaleSite(WebsiteSale):
         }
 
         lead  = request.env['crm.lead'].create(vals)
+        #we are adding variant_line link after creating, doesnt work during the creation
         lead.variant_line_ids = variant_line_ids
+        #return of the view
         return request.render("configOdoo.thanks_page")

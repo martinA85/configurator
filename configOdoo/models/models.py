@@ -13,20 +13,6 @@ class Product(models.Model):
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
 
-	# @api.onchange('is_configurable', 'lst_price')
-	# def _create_base_product(self):
-	# 	for record in self:
-	# 		if record.is_configurable:
-	# 			vals = {
-	# 					'product_tmpl_id' : record.id,
-	# 					'image_variant' : record.image,
-	# 					'default_code' : 'conf_base',
-	# 					'name' : str(record.name) + " base"
-	# 			}
-	# 			if not self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]):
-	# 				self.env['product.product'].create(vals)
-	# 			else :
-	# 				self.env['product.product'].search([['product_tmpl_id','=',record.id],['default_code','=','conf_base']]).update(vals)
 
 class ProductProduct(models.Model):
 	_inherit = "product.product"
@@ -113,6 +99,7 @@ class SaleOrderLine(models.Model):
 
 	@api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
 	def _compute_amount(self):
+		#this function is herited to update price while using js_add_cart_json button on cart view
 		to_return = super(SaleOrderLine,self)._compute_amount()
 		for line in self:
 			if(line.config.total_price == 0):
@@ -135,6 +122,7 @@ class SaleOrder(models.Model):
     	to_return = super(SaleOrder, self)._cart_update(product_id=int(product_id),add_qty=add_qty, set_qty=set_qty)
     	order_line = self._cart_find_product_line(product_id, line_id, **kwargs)
     	product = self.env['product.product'].browse(product_id)
+		#if product is a configured product
     	if config != None:
     		config_tmp = self.env['configurateur.config']
     		config = config_tmp.browse(int(config))
@@ -144,13 +132,16 @@ class SaleOrder(models.Model):
     		order_line.variant_line_ids = config.variant_line_ids
     		order_line.total_price = price
     		order_line.extra_config = price - product.price
+			#recomputing order.line price
     		order_line._compute_amount()
     		values = self._website_product_id_change(self.id, product_id, qty=order_line.product_uom_qty)
+			#recomputing taxes
     		values['price_unit'] = self.env['account.tax']._fix_tax_included_price(
                     order_line._get_display_price(product),
                     order_line.product_id.taxes_id,
                     order_line.tax_id
     		)
+			#updating order line
     		order_line.write(values)
     		return {"line_id":order_line.id, 'quantity':1}
     	else:
