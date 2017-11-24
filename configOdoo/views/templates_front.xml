@@ -329,7 +329,7 @@
                                 </form>
                             </t>
                             <t t-if="salable">
-                              <form action="/shop/cart/update" method="POST" style="text-align:right" style="position:relative;z-index:4;background-color:white;">
+                              <form action="/shop/cart/update" method="POST" style="text-align:right;position:relative;z-index:4;background-color:white;">
                                   <input name="product_id" id="product_id" t-att-value="product_config.id" type="hidden"/>
                                   <input name="config" t-att-value="config.id" type="hidden"/>
                                   <input class="btn btn-success" type="submit" value="Add to cart" style="padding:10px;margin-right:60px;margin-top:-80px"/>
