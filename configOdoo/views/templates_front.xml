@@ -232,20 +232,20 @@
                                     <t t-foreach="variants" t-as="variant">
                                         <tr>
                                             <td>
-                                                <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
-                                                <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                                <row><h4 style="margin-left:200px"><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
+                                                <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;margin-left:200px"}'/></row>
                                             </td>
                                             <td></td>
                                             <td style="text-align: -webkit-right;">
-                                                <p>+<span t-field="variant.extra_price"/>€</p>
+                                                <p style="margin-right:350px">+<span t-field="variant.extra_price"/>€</p>
                                             </td>
                                         </tr>
                                     </t>
                                     <tfooter>
                                         <tr>
-                                            <td><h4>Total : </h4></td>
+                                            <td><h4 style="margin-left:200px">Total : </h4></td>
                                             <td></td>
-                                            <td style="text-align: -webkit-right;"><span t-field="config.total_price"/>€</td>
+                                            <td style="text-align: -webkit-right;margin-right:350px;"><span t-field="config.total_price"/>€</td>
                                         </tr>
                                     </tfooter>
                                   </table>
@@ -278,20 +278,20 @@
                                 <t t-foreach="variants" t-as="variant">
                                     <tr>
                                         <td>
-                                            <row><h4 style="margin-left:200px"><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
-                                            <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;margin-left:200px"}'/></row>
+                                            <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
+                                            <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;"}'/></row>
                                         </td>
                                         <td></td>
                                         <td style="text-align: -webkit-right;">
-                                            <p style="margin-right:350px">+<span t-field="variant.extra_price"/>€</p>
+                                            <p>+<span t-field="variant.extra_price"/>€</p>
                                         </td>
                                     </tr>
                                 </t>
                                 <tfooter>
                                     <tr>
-                                        <td style="margin-left:200px"><h4>Total : </h4></td>
+                                        <td><h4>Total : </h4></td>
                                         <td></td>
-                                        <td style="text-align: -webkit-right;margin-right:350px;"><span t-field="config.total_price"/>€</td>
+                                        <td style="text-align: -webkit-right;"><span t-field="config.total_price"/>€</td>
                                     </tr>
                                 </tfooter>
                               </table>
