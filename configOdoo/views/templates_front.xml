@@ -209,8 +209,8 @@
                     <div class="oe_structure">
                         <t t-if="product.layout=='h'">
                           <div class="row">
-                            <div class="col-sm-10">
-                              <div style="background-attachement:fixed;background-position: center;background-size: cover;min-height:500px;background-image:url(/configOdoo/static/img/circle.png);">
+                            <div class="col-sm-10 col-offset-1">
+                              <div style="background-attachement:fixed;background-position:center;background-size:auto;min-height:500px;background-image:url(/configOdoo/static/img/circle.png);">
                                 <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:235px;border-style:solid;border-width:4px;border-color:#434343;"}'/>
                               </div>
                               <div>
