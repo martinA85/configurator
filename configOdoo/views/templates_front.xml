@@ -213,8 +213,8 @@
                               <div style="background-attachment:fixed;background-position:center;background-size:auto;min-height:500px;background-image:url(/configOdoo/static/img/circle.png);">
                               </div>
                               <div>
-                                <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:235px;border-style:solid;border-width:4px;border-color:#434343;position:fixed"}'/>
-                                <table class="table" style="margin-top:15px;position:relative;">
+                                <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:500px;border-style:solid;border-width:4px;border-color:#434343;position:fixed;margin-top:-100px;z-index:1;"}'/>
+                                <table class="table" style="margin-top:15px;position:relative;z-index:3;">
                                     <thead>
                                         <th>Your Configuration</th>
                                     </thead>
