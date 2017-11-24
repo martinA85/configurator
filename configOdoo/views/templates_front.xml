@@ -215,7 +215,7 @@
                               <div>
                                 <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:500px;border-style:solid;border-width:4px;border-color:#434343;position:fixed;margin-top:-435px;margin-left:400px;z-index:1;"}'/>
                                 <div style="margin-top:15px;position:relative;z-index:3;background-color:white;opacity:0.7;">
-                                  <table class="table" style:"opacity:1;">
+                                  <table class="table" style="opacity:1;">
                                     <thead>
                                         <th>Your Configuration</th>
                                     </thead>
