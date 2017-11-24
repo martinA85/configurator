@@ -207,87 +207,52 @@
             <t t-call="website.layout">
                 <t t-set="title">Configuration summary</t>
                     <div class="oe_structure">
-                        <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/circle.png);padding-bottom:20px;padding-top:20px">
-                          <t t-if="product.layout=='h'">
-                            <div class="col-sm-6" style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/circle.png);padding-bottom:20px;padding-top:20px">
-                              <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:345px;border-style:solid;border-width:5px;border-color:#434343"}'/>
-                            </div>
-                            <div>
-                              <table class="table" style="margin-top:15px">
-                                  <thead>
-                                      <th>Your Configuration</th>
-                                  </thead>
-                                  <tr>
-                                      <td>
-                                          <row><h4>Product : <span t-field="product.name"/></h4></row>
-                                          <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
-                                      </td>
-                                      <td></td>
-                                      <td style="text-align: -webkit-right;">
-                                          <p><span t-field="product.lst_price"/>€</p>
-                                      </td>
-                                  </tr>
-                                  <t t-foreach="variants" t-as="variant">
-                                      <tr>
-                                          <td>
-                                              <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
-                                              <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
-                                          </td>
-                                          <td></td>
-                                          <td style="text-align: -webkit-right;">
-                                              <p>+<span t-field="variant.extra_price"/>€</p>
-                                          </td>
-                                      </tr>
-                                  </t>
-                                  <tfooter>
-                                      <tr>
-                                          <td><h4>Total : </h4></td>
-                                          <td></td>
-                                          <td style="text-align: -webkit-right;"><span t-field="config.total_price"/>€</td>
-                                      </tr>
-                                  </tfooter>
-                              </table>
-                            </div>
-                          </t>
-                          <t t-if="product.layout=='v'">
+                        <t t-if="product.layout=='h'">
+                          <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:345px;border-style:solid;border-width:5px;border-color:#434343"}'/>
+                        </t>
+                        <t t-if="product.layout=='v'">
+                          <div class="col-sm-6">
                             <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:235px;border-style:solid;border-width:4px;border-color:#434343"}'/>
-                          </t>
-                         <div class="container" style="background-color:white; padding-bottom:20px; padding-top:1%;margin-bottom:10px">
-                            <div class="col-sm-10 col-sm-offset-1">
-                                <table class="table" style="margin-top:15px">
-                                    <thead>
-                                        <th>Your Configuration</th>
-                                    </thead>
+                          </div>
+                          <div class="col-sm-6">
+                            <table class="table" style="margin-top:15px">
+                                <thead>
+                                    <th>Your Configuration</th>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <row><h4>Product : <span t-field="product.name"/></h4></row>
+                                        <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                    </td>
+                                    <td></td>
+                                    <td style="text-align: -webkit-right;">
+                                        <p><span t-field="product.lst_price"/>€</p>
+                                    </td>
+                                </tr>
+                                <t t-foreach="variants" t-as="variant">
                                     <tr>
                                         <td>
-                                            <row><h4>Product : <span t-field="product.name"/></h4></row>
-                                            <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                            <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
+                                            <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
                                         </td>
                                         <td></td>
                                         <td style="text-align: -webkit-right;">
-                                            <p><span t-field="product.lst_price"/>€</p>
+                                            <p>+<span t-field="variant.extra_price"/>€</p>
                                         </td>
                                     </tr>
-                                    <t t-foreach="variants" t-as="variant">
-                                        <tr>
-                                            <td>
-                                                <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
-                                                <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
-                                            </td>
-                                            <td></td>
-                                            <td style="text-align: -webkit-right;">
-                                                <p>+<span t-field="variant.extra_price"/>€</p>
-                                            </td>
-                                        </tr>
-                                    </t>
-                                    <tfooter>
-                                        <tr>
-                                            <td><h4>Total : </h4></td>
-                                            <td></td>
-                                            <td style="text-align: -webkit-right;"><span t-field="config.total_price"/>€</td>
-                                        </tr>
-                                    </tfooter>
-                                </table>
+                                </t>
+                                <tfooter>
+                                    <tr>
+                                        <td><h4>Total : </h4></td>
+                                        <td></td>
+                                        <td style="text-align: -webkit-right;"><span t-field="config.total_price"/>€</td>
+                                    </tr>
+                                </tfooter>
+                              </table>
+                            </div>
+                          </t>
+                         <div class="container" style="background-color:white; padding-bottom:20px; padding-top:1%;margin-bottom:10px">
+                            <div class="col-sm-10 col-sm-offset-1">
                             <t t-if="not salable">
                                 <div class="alert alert-info">
                                   <strong>Info :</strong>This product can't be ordered but you can ask for a quotation
