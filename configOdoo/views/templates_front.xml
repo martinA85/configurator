@@ -213,7 +213,7 @@
                         <t t-if="product.layout=='v'">
                           <div class="col-sm-6" style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/circle.png);padding-bottom:20px;padding-top:20px">
                             <div class="col-sm-6 col-offset-2">
-                              <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:235px;border-style:solid;border-width:4px;border-color:#434343"}'/>
+                              <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:235px;border-style:solid;border-width:4px;border-color:#434343;margin-top:70px;margin-bottom:104px;margin-left:206px"}'/>
                             </div>
                           </div>
                           <div class="col-sm-6">
