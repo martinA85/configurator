@@ -207,7 +207,7 @@
             <t t-call="website.layout">
                 <t t-set="title">Configuration summary</t>
                     <div class="oe_structure oe_empty">
-                        <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/brickwall.png);padding-bottom:20px;padding-top:20px">
+                        <div style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/circles-and-roundabouts.png);padding-bottom:20px;padding-top:20px">
                           <t t-if="product.layout=='h'">
                             <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:345px;border-style:solid;border-width:5px;border-color:#434343"}'/>
                           </t>
@@ -338,7 +338,7 @@
                              </div>
                              <div style="background-color:white;margin-top:0%;padding-top:30px;padding-bottom:25px">
                                  <h4 style="margin-top:10px;margin-bottom:10px">We have take note of you demand</h4>
-                                <p style="margin-top:10px;margin-bottom:10px">We will contact back you as soon as possbile</p>
+                                <p style="margin-top:10px;margin-bottom:10px">We will contact you as soon as possbile</p>
                                 <a class="btn btn-success" href="/" style="margin-top:10px;margin-bottom:10px">Home</a>
                              </div>
                         </div>
