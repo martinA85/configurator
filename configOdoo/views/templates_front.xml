@@ -221,12 +221,12 @@
                                     </thead>
                                     <tr>
                                         <td>
-                                            <row><h4>Product : <span t-field="product.name"/></h4></row>
-                                            <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                            <row><h4 style="margin-left:200px">Product : <span t-field="product.name"/></h4></row>
+                                            <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;margin-left:200px"}'/></row>
                                         </td>
                                         <td></td>
                                         <td style="text-align: -webkit-right;">
-                                            <p><span t-field="product.lst_price"/>€</p>
+                                            <p style="margin-right:350px"><span t-field="product.lst_price"/>€</p>
                                         </td>
                                     </tr>
                                     <t t-foreach="variants" t-as="variant">
