@@ -208,6 +208,49 @@
                 <t t-set="title">Configuration summary</t>
                     <div class="oe_structure">
                         <t t-if="product.layout=='h'">
+                          <div class="row">
+                            <div class="col-sm-10">
+                              <div style="background-attachement:fixed;background-position: center;background-size: cover;min-height:500px;background-image:url(/configOdoo/static/img/circle.png);">
+                                <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:235px;border-style:solid;border-width:4px;border-color:#434343;"}'/>
+                              </div>
+                              <div>
+                                <table class="table" style="margin-top:15px">
+                                    <thead>
+                                        <th>Your Configuration</th>
+                                    </thead>
+                                    <tr>
+                                        <td>
+                                            <row><h4>Product : <span t-field="product.name"/></h4></row>
+                                            <row><span t-field="product.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                        </td>
+                                        <td></td>
+                                        <td style="text-align: -webkit-right;">
+                                            <p><span t-field="product.lst_price"/>€</p>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="variants" t-as="variant">
+                                        <tr>
+                                            <td>
+                                                <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
+                                                <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px"}'/></row>
+                                            </td>
+                                            <td></td>
+                                            <td style="text-align: -webkit-right;">
+                                                <p>+<span t-field="variant.extra_price"/>€</p>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tfooter>
+                                        <tr>
+                                            <td><h4>Total : </h4></td>
+                                            <td></td>
+                                            <td style="text-align: -webkit-right;"><span t-field="config.total_price"/>€</td>
+                                        </tr>
+                                    </tfooter>
+                                  </table>
+                              </div>
+                            </div>
+                          </div>
                           <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:345px;border-style:solid;border-width:5px;border-color:#434343"}'/>
                         </t>
                         <t t-if="product.layout=='v'">
@@ -285,11 +328,11 @@
                                 </form>
                             </t>
                             <t t-if="salable">
-                                <form action="/shop/cart/update" method="POST" style="text-align:right">
-                                    <input name="product_id" id="product_id" t-att-value="product_config.id" type="hidden"/>
-                                    <input name="config" t-att-value="config.id" type="hidden"/>
-                                    <input class="btn btn-success" type="submit" value="Add to cart" style="padding:10px;margin-right:40px;margin-top:-55px"/>
-                                </form>
+                              <form action="/shop/cart/update" method="POST" style="text-align:right">
+                                  <input name="product_id" id="product_id" t-att-value="product_config.id" type="hidden"/>
+                                  <input name="config" t-att-value="config.id" type="hidden"/>
+                                  <input class="btn btn-success" type="submit" value="Add to cart" style="padding:10px;margin-right:60px;margin-top:-80px"/>
+                              </form>
                             </t>
                         </div>
                     </div>
