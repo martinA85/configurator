@@ -245,7 +245,7 @@
                                         <tr>
                                             <td><h4 style="margin-left:200px">Total : </h4></td>
                                             <td></td>
-                                            <td style="text-align: -webkit-right;"><span t-field="config.total_price" style="margin-right:350px;"/>€</td>
+                                            <td style="text-align: -webkit-right;"><p style="margin-right:350px;"><span t-field="config.total_price"/>€</p></td>
                                         </tr>
                                     </tfooter>
                                   </table>
