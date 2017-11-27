@@ -255,11 +255,9 @@
                           </div>
                         </t>
                         <t t-if="product.layout=='v'">
-                          <div class="row"  style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/circle.png);padding-bottom:20px;padding-top:20px">
+                          <div class="row row-eq-height"  style="text-align:-webkit-center;background-image:url(/configOdoo/static/img/circle.png);padding-bottom:20px;padding-top:20px">
                             <div class="col-sm-6">
-                              <div class="col-sm-6">
-                                <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:300px;border-style:solid;border-width:4px;border-color:#434343;margin-top:70px;margin-bottom:104px;margin-left:206px;position:fixed"}'/>
-                              </div>
+                              <span t-field="config.config_image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"max-width:300px;border-style:solid;border-width:4px;border-color:#434343;margin-top:70px;margin-bottom:104px;margin-left:206px;position:fixed"}'/>
                             </div>
                             <div class="col-sm-6 col-sm-offset-6">
                               <table class="table" style="margin-top:15px background-color:white;">
