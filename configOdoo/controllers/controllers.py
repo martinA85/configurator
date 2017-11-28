@@ -35,11 +35,11 @@ class ConfigurateurProduct(http.Controller):
         config_var_ids = list()
         for id_variant in variant_id:
             try:
-                variant = variant_template.browse(int(id_variant))
+                variant = product_template.browse(int(id_variant))
                 selected_variant.append(variant)
                 config_var_ids.append(variant.id)
-                config_price += variant.extra_price
-                var_img = Image.open(BytesIO(base64.b64decode(variant.image))).convert("RGBA")
+                config_price += variant.lst_price
+                var_img = Image.open(BytesIO(base64.b64decode(variant.variant_img))).convert("RGBA")
                 var_img.convert('RGB')
                 config_image.paste(var_img, (0,0),var_img)
             except:

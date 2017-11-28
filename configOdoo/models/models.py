@@ -77,7 +77,7 @@ class ConfigProduct(models.Model):
 	_name="configurateur.config"
 
 	total_price = fields.Float("Total Cost", default=0)
-	variant_line_ids = fields.Many2many("configurateur_product.line", string="Variant line list")
+	variant_line_ids = fields.Many2many("product.template", string="Variant line list")
 	config_image = fields.Binary("Image", attachment=True)
 	config_code = fields.Char(readonly="1", visible="0", compute="_compute_config_code")
 
@@ -95,7 +95,7 @@ class SaleOrderLine(models.Model):
 
 	extra_config = fields.Monetary(string="extra config price")
 	config = fields.Many2one("configurateur.config", readonly="1", visible="0")
-	variant_line_ids = fields.Many2many("configurateur_product.line")
+	variant_line_ids = fields.Many2many("product.template")
 	config_txt = fields.Char(compute="_compute_code_config")
 
 	@api.depends('config')
@@ -160,7 +160,7 @@ class SaleOrder(models.Model):
 class Lead(models.Model):
 	_inherit = "crm.lead"
 
-	variant_line_ids = fields.Many2many("configurateur_product.line")
+	variant_line_ids = fields.Many2many("product.template")
 
 
 class SaleConfigSetting(models.TransientModel):
