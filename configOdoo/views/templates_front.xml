@@ -237,7 +237,7 @@
                                             </td>
                                             <td></td>
                                             <td style="text-align: -webkit-right;">
-                                                <p style="margin-right:350px">+<span t-field="variant.extra_price"/>€</p>
+                                                <p style="margin-right:350px">+<span t-field="variant.lst_price"/>€</p>
                                             </td>
                                         </tr>
                                     </t>
@@ -282,7 +282,7 @@
                                           </td>
                                           <td></td>
                                           <td style="text-align: -webkit-right;">
-                                              <p>+<span t-field="variant.extra_price"/>€</p>
+                                              <p>+<span t-field="variant.lst_price"/>€</p>
                                           </td>
                                       </tr>
                                   </t>
