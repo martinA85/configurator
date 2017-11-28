@@ -24,6 +24,16 @@
                     </group>
                 </page>
             </xpath>
+            <xpath expr="//page[@name='sales']" position="after">
+                <page name="composer" string="Composer" attrs="{'invisible': [('is_composer', '=', False)]}">
+                    <group>
+                        <field name="reference"/>
+                    </group>
+                    <group>
+                      <field name="icon" widget="image" string="Composer image for the configurator"/>
+                    </group>
+                </page>
+            </xpath>
         </field>
       </record>
 
