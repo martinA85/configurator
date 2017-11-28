@@ -65,7 +65,7 @@ class variant_material(models.Model):
 
 	name = fields.Char()
 	libelle = fields.Char(string = "Name printed on the website")
-	line_ids = fields.One2many('configurateur_product.line', 'material_id',string="Variant line list")
+	line_ids = fields.One2many('product.template', 'material_id',string="Variant line list")
 	href_id = fields.Char(compute="_compute_href", readonly="1", visible="0")
 	variant_id = fields.Many2one('configurateur_product.variant',visible="0")
 
