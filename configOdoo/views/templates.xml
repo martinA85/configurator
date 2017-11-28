@@ -51,66 +51,65 @@
           </xpath>
       </field>
     </record>
+    
+    <record id="sale_order_form_config" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                <field name="variant_line_ids" string="Configuration">
+                    <tree>
+                        <field name="variant_string"/>
+                        <field name="name"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
 
+    <record id="crm.lead_form_config" model="ir.ui.view">
+       <field name="model">crm.lead</field>
+       <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+       <field name="priority">16</field>
+       <field name="arch" type="xml">
+           <xpath expr="//page[@name='lead']" position="after">
+               <page name="configuration" string="Configuration" attrs="{'invisible': [('variant_line_ids', '=', [])]}">
+                   <group>
+                       <field name="variant_line_ids" string="Configuration">
+                           <tree>
+                               <field name="variant_string"/>
+                               <field name="name"/>
+                           </tree>
+                       </field>
+                   </group>
+               </page>
+           </xpath>
+       </field>
+    </record>
 
-        <record id="sale_order_form_config" model="ir.ui.view">
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form"/>
-            <field name="priority">16</field>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
-                    <field name="variant_line_ids" string="Configuration">
+    <record id="variant_form_view" model="ir.ui.view">
+
+    <field name="name">variant_from_view</field>
+    <field name="model">configurateur_product.variant</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="name" />
+                    <field name="libelle" />
+                </group>
+                <group>
+                    <field name="material_ids">
                         <tree>
-                            <field name="variant_string"/>
-                            <field name="name"/>
+                            <field name="name" />
+                            <field name="libelle" />
                         </tree>
                     </field>
-                </xpath>
-            </field>
-        </record>
-
-        <record id="crm.lead_form_config" model="ir.ui.view">
-           <field name="model">crm.lead</field>
-           <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
-           <field name="priority">16</field>
-           <field name="arch" type="xml">
-               <xpath expr="//page[@name='lead']" position="after">
-                   <page name="configuration" string="Configuration" attrs="{'invisible': [('variant_line_ids', '=', [])]}">
-                       <group>
-                           <field name="variant_line_ids" string="Configuration">
-                               <tree>
-                                   <field name="variant_string"/>
-                                   <field name="name"/>
-                               </tree>
-                           </field>
-                       </group>
-                   </page>
-               </xpath>
-           </field>
-        </record>
-
-        <record id="variant_form_view" model="ir.ui.view">
-
-        <field name="name">variant_from_view</field>
-        <field name="model">configurateur_product.variant</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="name" />
-                        <field name="libelle" />
-                    </group>
-                    <group>
-                        <field name="material_ids">
-                            <tree>
-                                <field name="name" />
-                                <field name="libelle" />
-                            </tree>
-                        </field>
-                    </group>
-                </sheet>
-            </form>
-        </field>
+                </group>
+            </sheet>
+        </form>
+    </field>
 
     </record>
 
