@@ -36,6 +36,7 @@
           <xpath expr="//div[@name='options']" position="inside">
             <div>
               <field name="is_composer"/>
+              <label for="is_composer"/>
             </div>
           </xpath>
       </field>
