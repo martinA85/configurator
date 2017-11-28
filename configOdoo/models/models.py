@@ -11,6 +11,7 @@ class Product(models.Model):
 	background = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
+	composer = fields.Boolean(string="composée", default=False, help="Yes if the product can be a part of a configured product")
 
 
 class ProductProduct(models.Model):
@@ -29,7 +30,7 @@ class Variant(models.Model):
 
 	name = fields.Char(string = "Variant name", help="This name should be unique")
 	libelle = fields.Char(string = "Name printed on the website")
-	material_ids = fields.One2many('configurateur.material', 'variant_id',string = "material")
+	material_ids = fields.One2many('configurateur.material', 'variant_id',string="material")
 
 
 class Line_variant(models.Model):
