@@ -13,7 +13,7 @@ class Product(models.Model):
 	is_composer = fields.Boolean(string="Composer", default=False, help="Yes if the product can be a part of a configured product")
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
 
-	icon = fields.Binary("Image", attachment=True, help="This field holds the image used as image for the product, limited to 1024x1024px.")
+	variant_img = fields.Binary("Image", attachment=True, help="This field holds the image used as image for the product, limited to 1024x1024px.")
 	material_id = fields.Many2one('configurateur.material','line_ids', visible="0")
 	variant_string = fields.Char(compute="_compute_variant_string")
 	reference = fields.Char(string="Variant line reference", help="Should be unique")

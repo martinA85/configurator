@@ -30,7 +30,7 @@
                         <field name="reference"/>
                     </group>
                     <group>
-                      <field name="icon" widget="image" string="Composer image for the configurator"/>
+                      <field name="variant_img" widget="image" string="Composer image for the configurator"/>
                     </group>
                 </page>
             </xpath>
@@ -51,7 +51,7 @@
           </xpath>
       </field>
     </record>
-    
+
     <record id="sale_order_form_config" model="ir.ui.view">
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
