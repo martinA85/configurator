@@ -10,7 +10,7 @@ class Product(models.Model):
 	variant_ids = fields.Many2many('configurateur_product.variant', string="Variants")
 	background = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
-	# composer = fields.Boolean(string="composée", default=False, help="Yes if the product can be a part of a configured product")
+	is_composer = fields.Boolean(string="composée", default=False, help="Yes if the product can be a part of a configured product")
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
 
 
