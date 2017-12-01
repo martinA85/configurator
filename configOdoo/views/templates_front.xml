@@ -42,12 +42,12 @@
                                                                 <t t-foreach="material.line_ids" t-as="v_line">
                                                                     <li style="display:inline-block;">
                                                                         <div t-att-class="p_variant.name">
-                                                                            <span t-field="v_line.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
-                                                                            <input type="hidden" t-att-value="v_line.name" id="line_libelle" class="variant_string"/>
-                                                                            <input type="hidden" t-att-value="v_line.lst_price" class="variant_extra"/>
+                                                                            <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
+                                                                            <input type="hidden" t-att-value="v_line.libelle" id="line_libelle" class="variant_string"/>
+                                                                            <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
                                                                             <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
                                                                         </div>
-                                                                        <p class="text-center">+<span t-field="v_line.lst_price"/>€</p>
+                                                                        <p class="text-center">+<span t-field="v_line.extra_price"/>€</p>
                                                                     </li>
                                                                 </t>
                                                             </ul>
@@ -172,12 +172,12 @@
                                                             <t t-foreach="material.line_ids" t-as="v_line">
                                                                 <li style="display:inline-block;">
                                                                     <div t-att-class="p_variant.name">
-                                                                        <span t-field="v_line.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
-                                                                        <input type="hidden" t-att-value="v_line.name" class="variant_string"/>
-                                                                        <input type="hidden" t-att-value="v_line.lst_price" class="variant_extra"/>
+                                                                        <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
+                                                                        <input type="hidden" t-att-value="v_line.libelle" class="variant_string"/>
+                                                                        <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
                                                                         <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
                                                                     </div>
-                                                                    <p class="text-center">+<span t-field="v_line.lst_price"/>€</p>
+                                                                    <p class="text-center">+<span t-field="v_line.extra_price"/>€</p>
                                                                 </li>
                                                             </t>
                                                         </ul>
@@ -233,11 +233,11 @@
                                         <tr>
                                             <td>
                                                 <row><h4 style="margin-left:200px"><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
-                                                <row><span t-field="variant.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;margin-left:200px"}'/></row>
+                                                <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;margin-left:200px"}'/></row>
                                             </td>
                                             <td></td>
                                             <td style="text-align: -webkit-right;">
-                                                <p style="margin-right:350px">+<span t-field="variant.lst_price"/>€</p>
+                                                <p style="margin-right:350px">+<span t-field="variant.extra_price"/>€</p>
                                             </td>
                                         </tr>
                                     </t>
@@ -278,11 +278,11 @@
                                       <tr>
                                           <td>
                                               <row><h4><span t-field="variant.variant_string" /> : <span t-field="variant.name"/></h4></row>
-                                              <row><span t-field="variant.image" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;"}'/></row>
+                                              <row><span t-field="variant.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img","style":"height:100px;width:100px;"}'/></row>
                                           </td>
                                           <td></td>
                                           <td style="text-align: -webkit-right;">
-                                              <p>+<span t-field="variant.lst_price"/>€</p>
+                                              <p>+<span t-field="variant.extra_price"/>€</p>
                                           </td>
                                       </tr>
                                   </t>

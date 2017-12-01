@@ -135,8 +135,8 @@ function genSrc(src){
     //src is the variant's icon image src : this function have to change the icon parameters of the url to image
     //src exemple http://ip:port/web/image/configurateur_product.line/22/icon?unique=6346df6
     splitC = src.split("?");
-    newSrc = splitC[0].substr(0, splitC[0].length-5);
-    newSrc = newSrc + "variant_img?" + splitC[1];
+    newSrc = splitC[0].substr(0, splitC[0].length-4);
+    newSrc = newSrc + "image?" + splitC[1];
     return newSrc;
 }
 

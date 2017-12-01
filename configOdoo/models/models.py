@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, tools
-import pprint
+
 # Herite du model produit pour rajouter un champ configurable
 class Product(models.Model):
 	_inherit = 'product.template'
@@ -10,18 +10,8 @@ class Product(models.Model):
 	variant_ids = fields.Many2many('configurateur_product.variant', string="Variants")
 	background = fields.Binary("Image", attachment=True, help="770px max width for horizontal layout, 570 px max width for vertical layout")
 	layout = fields.Selection([('v','Vertical'),('h','Horizontal')])
-	is_composer = fields.Boolean(string="Composer", default=False, help="Yes if the product can be a part of a configured product")
 	config_salable = fields.Boolean(string="Salable", default=False, help="If the product is salable, customer will be able to add the product to cart, if the product is not salable, customer will be able to ask for a quotation")
 
-	variant_img = fields.Binary("Image", attachment=True, help="This field holds the image used as image for the product, limited to 1024x1024px.")
-	material_id = fields.Many2one('configurateur.material','line_ids', visible="0")
-	variant_string = fields.Char(compute="_compute_variant_string")
-	reference = fields.Char(string="Variant line reference", help="Should be unique")
-
-	@api.depends('material_id')
-	def _compute_variant_string(self):
-		for record in self:
-			record.variant_string = record.material_id.variant_id.libelle
 
 class ProductProduct(models.Model):
 	_inherit = "product.product"
@@ -39,7 +29,7 @@ class Variant(models.Model):
 
 	name = fields.Char(string = "Variant name", help="This name should be unique")
 	libelle = fields.Char(string = "Name printed on the website")
-	material_ids = fields.One2many('configurateur.material', 'variant_id',string="material")
+	material_ids = fields.One2many('configurateur.material', 'variant_id',string = "material")
 
 
 class Line_variant(models.Model):
@@ -65,7 +55,7 @@ class variant_material(models.Model):
 
 	name = fields.Char()
 	libelle = fields.Char(string = "Name printed on the website")
-	line_ids = fields.One2many('product.template', 'material_id',string="Variant line list")
+	line_ids = fields.One2many('configurateur_product.line', 'material_id',string="Variant line list")
 	href_id = fields.Char(compute="_compute_href", readonly="1", visible="0")
 	variant_id = fields.Many2one('configurateur_product.variant',visible="0")
 
@@ -77,7 +67,7 @@ class ConfigProduct(models.Model):
 	_name="configurateur.config"
 
 	total_price = fields.Float("Total Cost", default=0)
-	variant_line_ids = fields.Many2many("product.template", string="Variant line list")
+	variant_line_ids = fields.Many2many("configurateur_product.line", string="Variant line list")
 	config_image = fields.Binary("Image", attachment=True)
 	config_code = fields.Char(readonly="1", visible="0", compute="_compute_config_code")
 
@@ -95,7 +85,7 @@ class SaleOrderLine(models.Model):
 
 	extra_config = fields.Monetary(string="extra config price")
 	config = fields.Many2one("configurateur.config", readonly="1", visible="0")
-	variant_line_ids = fields.Many2many("product.template")
+	variant_line_ids = fields.Many2many("configurateur_product.line")
 	config_txt = fields.Char(compute="_compute_code_config")
 
 	@api.depends('config')
@@ -155,39 +145,12 @@ class SaleOrder(models.Model):
     		return {"line_id":order_line.id, 'quantity':1}
     	else:
     		return to_return
-    		
-    @api.multi
-    def action_confirm(self):
-    	print("my action_confirm")
-    	to_return = super(SaleOrder, self).action_confirm();
-    	print("self.picking_ids : ")
-    	for move in self.picking_ids.move_lines :
-    		for composer in move.product_id.config_id.variant_line_ids:
-    			uom = composer.uom_id
-    			print(uom)
-    			composer = composer.product_variant_id
-    			vals = {
-    				"product_id" : composer.id,
-    				"product_uom_qty" : 1,
-    				"product_uom" : uom.id,
-    				"date" : move.date,
-    				"location_dest_id" : move.location_dest_id.id,
-    				"company_id" : move.company_id.id,
-    				"procure_method" : move.procure_method,
-    				"name" : move.name,
-    				"location_id": move.location_id.id,
-    				"state" : move.state,
-    			}
-    			newMove = self.env['stock.move'].create(vals)
-    			self.picking_ids.move_lines += newMove
-    			
-    	
 
 
 class Lead(models.Model):
 	_inherit = "crm.lead"
 
-	variant_line_ids = fields.Many2many("product.template")
+	variant_line_ids = fields.Many2many("configurateur_product.line")
 
 
 class SaleConfigSetting(models.TransientModel):
