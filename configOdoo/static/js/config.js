@@ -56,7 +56,6 @@ function clickOption(){
           imgChild.classList.remove("active_var");
           console.log(imgChild);
           imgChild.className += " unactive_var";
-          imgChild.style = "border:none;width:100px;height:100px;";
         }
     }
 
