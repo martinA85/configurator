@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, tools
-
+import pprint
 # Herite du model produit pour rajouter un champ configurable
 class Product(models.Model):
 	_inherit = 'product.template'
@@ -155,6 +155,33 @@ class SaleOrder(models.Model):
     		return {"line_id":order_line.id, 'quantity':1}
     	else:
     		return to_return
+    		
+    @api.multi
+    def action_confirm(self):
+    	print("my action_confirm")
+    	to_return = super(SaleOrder, self).action_confirm();
+    	print("self.picking_ids : ")
+    	for move in self.picking_ids.move_lines :
+    		for composer in move.product_id.config_id.variant_line_ids:
+    			uom = composer.uom_id
+    			print(uom)
+    			composer = composer.product_variant_id
+    			vals = {
+    				"product_id" : composer.id,
+    				"product_uom_qty" : 1,
+    				"product_uom" : uom.id,
+    				"date" : move.date,
+    				"location_dest_id" : move.location_dest_id.id,
+    				"company_id" : move.company_id.id,
+    				"procure_method" : move.procure_method,
+    				"name" : move.name,
+    				"location_id": move.location_id.id,
+    				"state" : move.state,
+    			}
+    			newMove = self.env['stock.move'].create(vals)
+    			self.picking_ids.move_lines += newMove
+    			
+    	
 
 
 class Lead(models.Model):
