@@ -62,7 +62,6 @@ function clickOption(){
 
     //step to set active the new active variant
     element.classList.remove("unactive_var");
-    element.style = "width:100px;height:100px;";
     if(!element.classList.contains("active_var")){
       element.className += " active_var";
     }
