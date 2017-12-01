@@ -271,7 +271,7 @@
                                       </td>
                                       <td></td>
                                       <td style="text-align: -webkit-right;">
-                                          <p style="margin-right:30px"><span t-field="product.lst_price"/>€</p>
+                                          <p style="margin-right:30px;font-size:20px;margin-top:55px"><span t-field="product.lst_price"/>€</p>
                                       </td>
                                   </tr>
                                   <t t-foreach="variants" t-as="variant">
@@ -282,7 +282,7 @@
                                           </td>
                                           <td></td>
                                           <td style="text-align: -webkit-right;">
-                                              <p style="margin-right:30px">+<span t-field="variant.extra_price"/>€</p>
+                                              <p style="margin-right:30px;font-size:20px;margin-top:55px">+<span t-field="variant.extra_price"/>€</p>
                                           </td>
                                       </tr>
                                   </t>
@@ -290,7 +290,7 @@
                                       <tr>
                                           <td><h4>Total : </h4></td>
                                           <td></td>
-                                          <td style="text-align: -webkit-right;"><p style="margin-right:30px"><span t-field="config.total_price"/>€</p></td>
+                                          <td style="text-align: -webkit-right;"><p style="margin-right:30px;font-size:25px;margin-top:17px"><span t-field="config.total_price"/>€</p></td>
                                       </tr>
                                   </tfooter>
                                 </table>
