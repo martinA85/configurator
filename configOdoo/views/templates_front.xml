@@ -42,7 +42,7 @@
                                                                 <t t-foreach="material.line_ids" t-as="v_line">
                                                                     <li style="display:inline-block;">
                                                                         <div t-att-class="p_variant.name">
-                                                                            <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
+                                                                            <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:110px;height:150px;object-fit:cover"}'/>
                                                                             <input type="hidden" t-att-value="v_line.libelle" id="line_libelle" class="variant_string"/>
                                                                             <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
                                                                             <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
@@ -172,7 +172,7 @@
                                                             <t t-foreach="material.line_ids" t-as="v_line">
                                                                 <li style="display:inline-block;">
                                                                     <div t-att-class="p_variant.name">
-                                                                        <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"100px;height:100px"}'/>
+                                                                        <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:110px;height:150px;object-fit:cover"}'/>
                                                                         <input type="hidden" t-att-value="v_line.libelle" class="variant_string"/>
                                                                         <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
                                                                         <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
