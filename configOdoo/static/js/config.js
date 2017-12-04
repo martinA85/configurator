@@ -106,7 +106,7 @@ function updateImage(element, parent){
     }else{
         //generating the selected icon in the variant tabs
         selected_img = document.createElement("img");
-        selected_img.style="position:absolute;margin:-73px 0px 0px 25px";
+        selected_img.style="position:absolute;margin:-95px 0px 0px 29px";
         selected_img.id=select_name;
         selected_img.className = "selected_variant_line";
         selected_img.src="http://imgshare.free.fr/uploads/aaea8347c8.png";
