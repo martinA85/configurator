@@ -174,7 +174,8 @@ function updateConfigTab(variant_name){
 function clearConfig(){
 
   if(layout == "h"){
-    var variant_name = this.parentElement.parentElement.parentElement.getElementsByClassName("variant_name_recap")[0].val;
+    var variant_name = this.parentElement.parentElement.parentElement.getElementsByClassName("variant_name_recap");
+    console.log("h")
   }else{
     var variant_name = this.parentElement.parentElement.getElementsByClassName("variant_name_recap")[0].val;
   }
