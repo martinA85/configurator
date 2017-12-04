@@ -123,7 +123,6 @@
                                                             <h5 style="padding-top:17px"><strong><span t-field="p_variant.name"/></strong>: <span class="variant_str_recap">Vide</span></h5>
                                                             <div class="" style="">
                                                                 <input type="hidden" t-att-value="p_variant.name" class="variant_name_recap"/>
-                                                                <button class="btn btn-xs btn-danger pull-right del-variant" style="margin-top:-57px;margin-right:100px">x</button>
                                                             </div>
                                                         </div>
                                                         <div class="text-center">
@@ -131,6 +130,7 @@
                                                         </div>
                                                         <div class="text-center">
                                                             <p style="margin-right:34px;">+<span class="variant_extra_recap"> 0 </span>€</p>
+                                                            <button class="btn btn-xs btn-danger pull-right del-variant" style="margin-top:-35px;margin-right:139px">x</button>
                                                         </div>
                                                     </div>
                                                 </div>

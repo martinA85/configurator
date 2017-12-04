@@ -173,7 +173,7 @@ function updateConfigTab(variant_name){
 //function that clear configuration (activated by del button on summary tab)
 function clearConfig(){
 
-  var variant_name = this.parentElement.childNodes[1].value;
+  var variant_name = this.parentElement.parentElement.getElementsByClassName("variant_name_recap");
 
   //first step : delete variant layer on the product image
   layer_name = "lay_"+variant_name;
@@ -182,8 +182,8 @@ function clearConfig(){
 
   //second step : delete variant info in summary tab
   //*this is the clicked button
-  variant_tab = this.parentElement.parentElement.parentElement;
-  variant_tab.getElementsByClassName("variant_str_recap")[0].innerHTML = "Vide";
+  variant_tab = this.parentElement.parentElement;
+  variant_tab.getElementsByClassName("variant_str_recap")[0].innerHTML = "Empty";
   variant_tab.getElementsByClassName("variant_extra_recap")[0].innerHTML = " 0 ";
   variant_tab.getElementsByClassName("variant_img_recap")[0].src = "/configOdoo/static/img/empty.png";
 
