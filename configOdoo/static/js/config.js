@@ -178,6 +178,8 @@ function clearConfig(){
     console.log("h")
   }else{
     var variant_name = this.parentElement.parentElement.getElementsByClassName("variant_name_recap")[0].val;
+    console.log(variant_name)
+    console.log("v")
   }
   console.log(variant_name)
   //first step : delete variant layer on the product image
