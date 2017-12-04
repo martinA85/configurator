@@ -76,7 +76,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="text-center">
-                                                        <h5 class="var_out" style=""><img class="variant_img_recap" style="height:60px;width:120px;margin-right:45px;;object-fit:cover;" src="/configOdoo/static/img/empty.png"/><input type="hidden" t-att-value="p_variant.name"/><span class="ref_output col-sm-10" style="padding-left:10px;font-size:11px"/></h5>
+                                                        <h5 class="var_out" style=""><img class="variant_img_recap" style="height:60px;width:120px;margin-right:45px;;object-fit:cover;" src="/configOdoo/static/img/empty.png"/><input type="hidden" class="variant_name_recap" t-att-value="p_variant.name"/><span class="ref_output col-sm-10" style="padding-left:10px;font-size:11px"/></h5>
                                                     </div>
                                                     <div class="text-center">
                                                         <p style="margin-right:34px;">+<span class="variant_extra_recap"> 0 </span>€</p>

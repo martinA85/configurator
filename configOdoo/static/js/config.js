@@ -174,11 +174,11 @@ function updateConfigTab(variant_name){
 function clearConfig(){
 
   var variant_name = this.parentElement.parentElement.getElementsByClassName("variant_name_recap")[0].val;
-
+  console.log(variant_name)
   //first step : delete variant layer on the product image
   layer_name = "lay_"+variant_name;
   layer = document.getElementById(layer_name);
-
+  console.log(layer)
   layer.parentElement.removeChild(layer);
 
   //second step : delete variant info in summary tab
