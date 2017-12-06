@@ -177,7 +177,7 @@
                                                                         <input type="hidden" t-att-value="v_line.libelle" class="variant_string"/>
                                                                         <input type="hidden" t-att-value="v_line.extra_price" class="variant_extra"/>
                                                                         <input type="hidden" t-att-value="v_line.id" class="variant_id"/>
-                                                                        <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"width:100%;height:100%;visibility:hidden;position:absolute;z-index:1"}'/>
+                                                                        <span t-field="v_line.icon" t-field-options='{"widget": "image","class": "oe_avatar cfg_img unactive_var variant_img", "style":"max-width:200px;maw-height:200px;visibility:hidden;position:absolute;z-index:1"}'/>
                                                                     </div>
                                                                     <p class="text-center">+<span t-field="v_line.extra_price"/>€</p>
                                                                 </li>
