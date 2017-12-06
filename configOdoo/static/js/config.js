@@ -272,6 +272,7 @@ function setVariantString(){
 }
 
 function displayBigIcon(){
+  console.log(event.target.parentElement.parentElement.childeNodes);
   event.target.parentElement.parentElement.childNodes[11].firstChild.style.visibility = "visible";
 }
 
