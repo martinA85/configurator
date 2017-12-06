@@ -273,9 +273,9 @@ function setVariantString(){
 
 function displayBigIcon(){
   console.log(event.target.parentElement.parentElement.childNodes);
-  event.target.parentElement.parentElement.childNodes[11].firstChild.style.visibility = "visible";
+  event.target.parentElement.parentElement.childNodes[9].firstChild.style.visibility = "visible";
 }
 
 function undisplayBigIcon(){
-  event.target.parentElement.parentElement.childNodes[11].firstChild.style.visibility = "hidden";
+  event.target.parentElement.parentElement.childNodes[9].firstChild.style.visibility = "hidden";
 }
