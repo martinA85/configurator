@@ -13,6 +13,8 @@ function init(){
       //if img has class variant_img : we add the eventListener
       if(clickable[i].className.indexOf("variant_img") >= 0){
           clickable[i].addEventListener("click",clickOption);
+          clickable[i].addEventListener("mouseover",displayBigIcon);
+          clickable[i].addEventListener("mouseleave", undisplayBigIcon);
       }
     }
     //all del_button (button on the summary tab)
@@ -267,4 +269,12 @@ function setVariantString(){
 
   }
   document.getElementById('variant_lst').value = idList;
+}
+
+function displayBigIcon(){
+  event.target.parentElement.parentElement.childNodes[11].firstChild.style.visibility = "visible";
+}
+
+function undisplayBigIcon(){
+  event.target.parentElement.parentElement.childNodes[11].firstChild.style.visibility = "hidden";
 }
